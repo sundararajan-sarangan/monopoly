@@ -1,3 +1,5 @@
+package monopoly;
+
 public class DiceResult {
     public Die die1;
     public Die die2;

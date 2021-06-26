@@ -1,17 +1,22 @@
+package test.monopoly.dice;
+
+import monopoly.Dice;
+import monopoly.DiceResult;
+import monopoly.Die;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DiceTest {
     @Test
     public void rollDice() {
         Dice dice = new Dice();
-        dice.roll();
+        DiceResult dr = dice.roll();
+        assertNotNull(dr.die1);
+        assertNotNull(dr.die2);
     }
 
     @Test
@@ -33,7 +38,6 @@ public class DiceTest {
 
         for(int i = 2; i <= 12; i++) {
             assertTrue(freq.containsKey(i));
-            System.out.println(freq.get(i));
         }
     }
 
@@ -48,7 +52,6 @@ public class DiceTest {
     @Test
     public void dieThrowsRuntimeExceptionIfValueOutOfBounds() {
         assertThrows(RuntimeException.class, () -> Die.of(7));
-
         assertThrows(RuntimeException.class, () -> Die.of(-1));
     }
 
