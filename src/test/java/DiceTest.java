@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -49,5 +50,17 @@ public class DiceTest {
         assertThrows(RuntimeException.class, () -> Die.of(7));
 
         assertThrows(RuntimeException.class, () -> Die.of(-1));
+    }
+
+    @Test
+    public void dieResultCanTellItsNotADouble() {
+        DiceResult dr = new DiceResult(Die.ONE, Die.TWO);
+        assertFalse(dr.isDouble());
+    }
+
+    @Test
+    public void dieResultCanTellItIsADouble() {
+        DiceResult dr = new DiceResult(Die.TWO, Die.TWO);
+        assertTrue(dr.isDouble());
     }
 }

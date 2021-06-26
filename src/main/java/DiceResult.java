@@ -9,4 +9,8 @@ public class DiceResult {
     public int value() {
         return die1.value + die2.value;
     }
+
+    public boolean isDouble() {
+        return die1.equals(die2);
+    }
 }
