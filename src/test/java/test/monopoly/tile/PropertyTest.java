@@ -1,5 +1,8 @@
 package test.monopoly.tile;
 
+import monopoly.board.Board;
+import monopoly.dice.Dice;
+import monopoly.player.Player;
 import monopoly.tile.ColorGroup;
 import monopoly.tile.DevelopedLevel;
 import monopoly.tile.Property;
@@ -39,5 +42,13 @@ public class PropertyTest {
     @Test
     public void testColorGroup() {
         assertEquals(ColorGroup.DARK_BLUE, boardWalk.colorGroup());
+    }
+
+    @Test void testPropertyOwner() {
+        Board board = new Board(40);
+        Dice dice = new Dice();
+        Player owner = new Player(0, board, dice);
+        boardWalk.setOwner(owner);
+        assertEquals(owner, boardWalk.owner());
     }
 }
