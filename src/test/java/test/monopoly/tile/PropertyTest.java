@@ -3,10 +3,9 @@ package test.monopoly.tile;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.Player;
-import monopoly.tile.ColorGroup;
-import monopoly.tile.DevelopedLevel;
-import monopoly.tile.Property;
-import monopoly.tile.Rents;
+import monopoly.tile.*;
+import monopoly.tile.money.Costs;
+import monopoly.tile.money.Rents;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +18,9 @@ public class PropertyTest {
 
     @BeforeEach
     public void init() {
-        boardWalk = new Property("Boardwalk", 440,
+        boardWalk = new Property("Boardwalk",
                 ColorGroup.DARK_BLUE,
+                new Costs(440, 200, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 50,
                         DevelopedLevel.ONE_HOUSE, 200,
                         DevelopedLevel.TWO_HOUSES, 600,

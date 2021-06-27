@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BoardTest {
+public class BoardPositionsTest {
     @Test
     public void canCreateNewBoardWithSomeSizeGreaterThan11() {
         Board board = new Board(40);
