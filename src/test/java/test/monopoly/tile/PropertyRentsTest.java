@@ -3,7 +3,10 @@ package test.monopoly.tile;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.Player;
-import monopoly.tile.*;
+import monopoly.tile.ColorGroup;
+import monopoly.tile.DevelopedLevel;
+import monopoly.tile.Property;
+import monopoly.tile.PropertyGroup;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +15,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PropertyGroupTest {
+public class PropertyRentsTest {
     private static Property boardwalk;
     private static Property parkPlace;
 
@@ -40,36 +43,36 @@ public class PropertyGroupTest {
                         DevelopedLevel.FOUR_HOUSES, 1300,
                         DevelopedLevel.HOTEL, 1500)), DevelopedLevel.NO_HOUSES);
     }
-
     @Test
-    public void sameOwnerForAllProperties() {
-        List<Property> properties = List.of(boardwalk, parkPlace);
-        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
-        Player owner = new Player(0, new Board(40), new Dice());
-        boardwalk.setOwner(owner);
-        parkPlace.setOwner(owner);
-        assertTrue(propertyGroup.oneOwnerHasMonopoly());
-    }
-
-    @Test
-    public void differentOwnerForProperties() {
-        List<Property> properties = List.of(boardwalk, parkPlace);
-        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
-        Dice dice = new Dice();
-        Player owner1 = new Player(0, new Board(40), dice);
-        Player owner2 = new Player(0, new Board(40), dice);
-        boardwalk.setOwner(owner1);
-        boardwalk.setOwner(owner2);
-        assertFalse(propertyGroup.oneOwnerHasMonopoly());
-    }
-
-    @Test
-    public void somePropertiesUnOwned() {
+    public void figureOutRentsOnGivenPropertyAndNoMonopoly() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
         Dice dice = new Dice();
         Player owner = new Player(0, new Board(40), dice);
         boardwalk.setOwner(owner);
-        assertFalse(propertyGroup.oneOwnerHasMonopoly());
+        assertEquals(50, boardwalk.rent(propertyGroup.oneOwnerHasMonopoly()));
+    }
+
+    @Test
+    public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyButNoDevelopmentAnywhere() {
+        List<Property> properties = List.of(boardwalk, parkPlace);
+        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        Dice dice = new Dice();
+        Player owner = new Player(0, new Board(40), dice);
+        boardwalk.setOwner(owner);
+        parkPlace.setOwner(owner);
+        assertEquals(100, boardwalk.rent(propertyGroup.oneOwnerHasMonopoly()));
+    }
+
+    @Test
+    public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyAndPropertyIsDeveloped() {
+        List<Property> properties = List.of(boardwalk, parkPlace);
+        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        Dice dice = new Dice();
+        Player owner = new Player(0, new Board(40), dice);
+        boardwalk.setOwner(owner);
+        parkPlace.setOwner(owner);
+        boardwalk.upgrade();
+        assertEquals(200, boardwalk.rent(propertyGroup.oneOwnerHasMonopoly()));
     }
 }

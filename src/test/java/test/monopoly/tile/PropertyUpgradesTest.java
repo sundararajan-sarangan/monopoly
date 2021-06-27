@@ -29,20 +29,20 @@ public class PropertyUpgradesTest {
 
     @Test
     public void testPropertyRentWithNoHouses() {
-        assertEquals(50, boardWalk.rent());
+        assertEquals(50, boardWalk.rent(false));
     }
 
     @Test
     public void testPropertyRentWithOneHouse() {
         boardWalk.upgrade();
-        assertEquals(200, boardWalk.rent());
+        assertEquals(200, boardWalk.rent(false));
     }
 
     @Test
     public void testPropertyRentWithTwoHouses() {
         boardWalk.upgrade();
         boardWalk.upgrade();
-        assertEquals(600, boardWalk.rent());
+        assertEquals(600, boardWalk.rent(false));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class PropertyUpgradesTest {
         boardWalk.upgrade();
         boardWalk.upgrade();
         boardWalk.upgrade();
-        assertEquals(1400, boardWalk.rent());
+        assertEquals(1400, boardWalk.rent(false));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class PropertyUpgradesTest {
         boardWalk.upgrade();
         boardWalk.upgrade();
         boardWalk.upgrade();
-        assertEquals(1700, boardWalk.rent());
+        assertEquals(1700, boardWalk.rent(false));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class PropertyUpgradesTest {
         boardWalk.upgrade();
         boardWalk.upgrade();
         boardWalk.upgrade();
-        assertEquals(2000, boardWalk.rent());
+        assertEquals(2000, boardWalk.rent(false));
     }
 
     @Test

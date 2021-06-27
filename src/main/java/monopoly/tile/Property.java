@@ -20,8 +20,13 @@ public class Property {
         this.colorGroup = colorGroup;
     }
 
-    public int rent() {
-        return getRentForTheCurrentlyDevelopedLevel();
+    public int rent(boolean ownerHasMonopoly) {
+        int rent = getRentForTheCurrentlyDevelopedLevel();
+        if(isUnimproved() && ownerHasMonopoly) {
+            rent = rent * 2;
+        }
+
+        return rent;
     }
 
     private Integer getRentForTheCurrentlyDevelopedLevel() {
@@ -52,7 +57,7 @@ public class Property {
         return owner;
     }
 
-    public boolean isUndeveloped() {
+    public boolean isUnimproved() {
         return this.developedLevel.equals(DevelopedLevel.NO_HOUSES);
     }
 }

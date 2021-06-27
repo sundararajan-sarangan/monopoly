@@ -23,17 +23,4 @@ public class PropertyGroup {
                 .collect(Collectors.toSet())
                 .size();
     }
-
-    public int rent(Property property) {
-        int rent = property.rent();
-        if(oneOwnerHasMonopoly() && isUndeveloped(property)) {
-            rent = rent * 2;
-        }
-
-        return rent;
-    }
-
-    private boolean isUndeveloped(Property property) {
-        return property.isUndeveloped();
-    }
 }
