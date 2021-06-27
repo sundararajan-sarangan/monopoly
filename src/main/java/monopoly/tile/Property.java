@@ -5,10 +5,10 @@ import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 
 public class Property {
-    private Rents rents;
-    private String name;
-    private int cost;
-    private ColorGroup colorGroup;
+    private final Rents rents;
+    private final String name;
+    private final int cost;
+    private final ColorGroup colorGroup;
     private Player owner;
 
     private DevelopedLevel developedLevel;
