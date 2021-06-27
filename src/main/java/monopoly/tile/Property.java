@@ -51,4 +51,8 @@ public class Property {
     public Player owner() {
         return owner;
     }
+
+    public boolean isUndeveloped() {
+        return this.developedLevel.equals(DevelopedLevel.NO_HOUSES);
+    }
 }

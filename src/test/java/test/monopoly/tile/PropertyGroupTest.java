@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PropertyGroupTest {
     private static Property boardwalk;
@@ -72,5 +71,38 @@ public class PropertyGroupTest {
         Player owner = new Player(0, new Board(40), dice);
         boardwalk.setOwner(owner);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
+    }
+
+    @Test
+    public void figureOutRentsOnGivenPropertyAndNoMonopoly() {
+        List<Property> properties = List.of(boardwalk, parkPlace);
+        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        Dice dice = new Dice();
+        Player owner = new Player(0, new Board(40), dice);
+        boardwalk.setOwner(owner);
+        assertEquals(50, propertyGroup.rent(boardwalk));
+    }
+
+    @Test
+    public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyButNoDevelopmentAnywhere() {
+        List<Property> properties = List.of(boardwalk, parkPlace);
+        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        Dice dice = new Dice();
+        Player owner = new Player(0, new Board(40), dice);
+        boardwalk.setOwner(owner);
+        parkPlace.setOwner(owner);
+        assertEquals(100, propertyGroup.rent(boardwalk));
+    }
+
+    @Test
+    public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyAndPropertyIsDeveloped() {
+        List<Property> properties = List.of(boardwalk, parkPlace);
+        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        Dice dice = new Dice();
+        Player owner = new Player(0, new Board(40), dice);
+        boardwalk.setOwner(owner);
+        parkPlace.setOwner(owner);
+        boardwalk.upgrade();
+        assertEquals(200, propertyGroup.rent(boardwalk));
     }
 }
