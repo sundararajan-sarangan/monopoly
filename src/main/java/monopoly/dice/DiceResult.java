@@ -1,4 +1,4 @@
-package monopoly;
+package monopoly.dice;
 
 public class DiceResult {
     public Die die1;

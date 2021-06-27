@@ -1,4 +1,4 @@
-package monopoly;
+package monopoly.dice;
 
 import java.util.Random;
 
