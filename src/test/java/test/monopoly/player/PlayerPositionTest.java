@@ -35,8 +35,8 @@ public class PlayerPositionTest {
     }
 
     private static class DiceTestStubThatAlwaysRolls extends Dice {
-        private Die die1;
-        private Die die2;
+        private final Die die1;
+        private final Die die2;
 
         public DiceTestStubThatAlwaysRolls(Die die1, Die die2) {
             this.die1 = die1;

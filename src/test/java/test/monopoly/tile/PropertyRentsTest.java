@@ -43,6 +43,7 @@ public class PropertyRentsTest {
                         DevelopedLevel.FOUR_HOUSES, 1300,
                         DevelopedLevel.HOTEL, 1500)), DevelopedLevel.NO_HOUSES);
     }
+
     @Test
     public void figureOutRentsOnGivenPropertyAndNoMonopoly() {
         List<Property> properties = List.of(boardwalk, parkPlace);
