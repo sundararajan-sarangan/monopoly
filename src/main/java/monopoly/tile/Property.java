@@ -45,7 +45,7 @@ public class Property {
         return name;
     }
 
-    public Group colorGroup() {
+    public Group group() {
         return group;
     }
 

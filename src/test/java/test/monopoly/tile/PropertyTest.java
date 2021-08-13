@@ -41,7 +41,7 @@ public class PropertyTest {
 
     @Test
     public void testColorGroup() {
-        assertEquals(Group.DARK_BLUE, boardWalk.colorGroup());
+        assertEquals(Group.DARK_BLUE, boardWalk.group());
     }
 
     @Test void testPropertyOwner() {
