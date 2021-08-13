@@ -24,12 +24,14 @@ public class PlayerLandsOnPropertyTest {
         Board board = makeStandardBoard();
         FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.TWO, Die.ONE);
         Player player = new Player(0, board, dice);
+        player.makeTurnToPlay();
 
         // When
         player.rollDiceAndMove();
 
         // Then
-        assertEquals(Move.BUY, player.currentOptions().get(0).move);
+        assertTrue(playerCan(Move.BUY, player));
+        assertFalse(playerCan(Move.PAY_RENT, player));
     }
 
     @Test
@@ -41,19 +43,16 @@ public class PlayerLandsOnPropertyTest {
         Player existingOwner = new Player(0, board, dummyDice);
         board.getPropertyAt(3).setOwner(existingOwner);
 
-        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.TWO, Die.ONE);
+        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.ONE, Die.TWO);
         Player player = new Player(0, board, dice);
+        player.makeTurnToPlay();
 
         // When
         player.rollDiceAndMove();
 
         // Then
-        List<Option> currentOptions = player.currentOptions();
-        Option zerothOption = currentOptions.get(0);
-        assertEquals(Move.PAY_RENT, zerothOption.move);
-        for(Option option : currentOptions) {
-            assertNotEquals(Move.BUY, option.move);
-        }
+        assertTrue(playerCan(Move.PAY_RENT, player));
+        assertFalse(playerCan(Move.BUY, player));
     }
 
     @Test
@@ -69,11 +68,8 @@ public class PlayerLandsOnPropertyTest {
         player.rollDiceAndMove();
 
         // Then
-        List<Option> currentOptions = player.currentOptions();
-        for(Option option : currentOptions) {
-            assertNotEquals(Move.BUY, option.move);
-            assertNotEquals(Move.PAY_RENT, option.move);
-        }
+        assertFalse(playerCan(Move.BUY, player));
+        assertFalse(playerCan(Move.PAY_RENT, player));
     }
 
     @NotNull
@@ -84,5 +80,15 @@ public class PlayerLandsOnPropertyTest {
 
     private Board makeStandardBoard() {
         return (new StandardBoardMaker()).makeBoard();
+    }
+
+    private boolean playerCan(Move move, Player player) {
+        for(Option option : player.currentOptions()) {
+            if(move.equals(option.move)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

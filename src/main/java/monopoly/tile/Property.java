@@ -64,15 +64,12 @@ public class Property {
     }
 
     public void visitedBy(Player player) {
-        Option option = new Option();
-        if(this.owner == null) {
-            option.move = Move.BUY;
-        } else if (player.equals(this.owner)) {
+        if(player.equals(owner)) {
             return;
-        } else {
-            option.move = Move.PAY_RENT;
         }
 
+        Option option = new Option();
+        option.move = owner == null ? Move.BUY : Move.PAY_RENT;
         player.addOption(option);
     }
 }

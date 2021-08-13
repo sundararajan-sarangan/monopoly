@@ -3,6 +3,7 @@ package monopoly.player;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.money.Cash;
+import monopoly.turn.Move;
 import monopoly.turn.Option;
 
 import java.util.ArrayList;
@@ -23,8 +24,23 @@ public class Player {
         this.options = new ArrayList<>();
     }
 
-    public void rollDiceAndMove() {
-        board.advancePlayer(this, positionsToAdvanceBy());
+    public boolean rollDiceAndMove() {
+        if(playersTurnToPlay()) {
+            board.advancePlayer(this, positionsToAdvanceBy());
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean playersTurnToPlay() {
+        for(Option option : options) {
+            if(Move.TURN_TO_PLAY.equals(option.move)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private int positionsToAdvanceBy() {
@@ -49,5 +65,11 @@ public class Player {
 
     public void addOption(Option option) {
         this.options.add(option);
+    }
+
+    public void makeTurnToPlay() {
+        Option option = new Option();
+        option.move = Move.TURN_TO_PLAY;
+        options.add(option);
     }
 }

@@ -7,8 +7,12 @@ import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import org.junit.jupiter.api.Test;
+import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class PlayerPositionTest {
     @Test
@@ -22,6 +26,7 @@ public class PlayerPositionTest {
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.ONE, Die.SIX);
         Board board = new StandardBoardMaker().makeBoard();
         Player player = new Player(0, board, dice);
+        player.makeTurnToPlay();
         player.rollDiceAndMove();
         assertEquals(7, player.position);
     }
@@ -31,8 +36,18 @@ public class PlayerPositionTest {
         Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.SIX, Die.SIX);
         Player player = new Player(36, board, dice);
+        player.makeTurnToPlay();
         player.rollDiceAndMove();
         assertEquals(8, player.position);
+    }
+
+    @Test
+    public void playerCannotRollDiceIfItsNotTheirTurn() {
+        Board board = new StandardBoardMaker().makeBoard();
+        Dice dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.FIVE, Die.FOUR)));
+        Player player = new Player(0, board, dice);
+        assertFalse(player.rollDiceAndMove());
+        assertEquals(0, player.position);
     }
 
     private static class DiceTestStubThatAlwaysRolls extends Dice {
