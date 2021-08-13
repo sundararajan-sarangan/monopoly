@@ -3,6 +3,8 @@ package monopoly.tile;
 import monopoly.player.Player;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
+import monopoly.turn.Move;
+import monopoly.turn.Option;
 
 public class Property {
     private final Rents rents;
@@ -59,5 +61,18 @@ public class Property {
 
     public boolean isUnimproved() {
         return this.developedLevel.equals(DevelopedLevel.NO_HOUSES);
+    }
+
+    public void visitedBy(Player player) {
+        Option option = new Option();
+        if(this.owner == null) {
+            option.move = Move.BUY;
+        } else if (player.equals(this.owner)) {
+            return;
+        } else {
+            option.move = Move.PAY_RENT;
+        }
+
+        player.addOption(option);
     }
 }

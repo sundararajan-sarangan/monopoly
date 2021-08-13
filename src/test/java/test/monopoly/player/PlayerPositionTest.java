@@ -4,6 +4,7 @@ import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
+import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class PlayerPositionTest {
     @Test
     public void playerRollsDiceMovesThemForward() {
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.ONE, Die.SIX);
-        Board board = new Board(40);
+        Board board = new StandardBoardMaker().makeBoard();
         Player player = new Player(0, board, dice);
         player.rollDiceAndMove();
         assertEquals(7, player.position);
@@ -27,7 +28,7 @@ public class PlayerPositionTest {
 
     @Test
     public void playerPositionWrapsAroundTheBoard() {
-        Board board = new Board(40);
+        Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.SIX, Die.SIX);
         Player player = new Player(36, board, dice);
         player.rollDiceAndMove();

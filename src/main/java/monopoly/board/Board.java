@@ -1,5 +1,6 @@
 package monopoly.board;
 
+import monopoly.player.Player;
 import monopoly.tile.Property;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class Board {
 
     public Property getPropertyAt(int i) {
         return properties.get(i);
+    }
+
+    public void advancePlayer(Player player, int positionsToAdvanceBy) {
+        player.position = this.getNewPosition(player.position, positionsToAdvanceBy);
+        Property property = this.getPropertyAt(player.position);
+        property.visitedBy(player);
     }
 }
