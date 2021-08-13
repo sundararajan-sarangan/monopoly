@@ -14,7 +14,7 @@ import java.util.*;
 public class StandardBoardMaker {
     private final static String COMMA_DELIMITER = ",";
     private final static String STANDARD_BOARD_DATA_FILE = "/StandardBoard.csv";
-    public Board makeBoard() throws FileNotFoundException {
+    public Board makeBoard() {
         List<Property> properties = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(Objects.requireNonNull(getClass().getResource(STANDARD_BOARD_DATA_FILE)).getPath()))) {
             while (scanner.hasNextLine()) {
@@ -40,6 +40,8 @@ public class StandardBoardMaker {
                 Property property = new Property(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
                 properties.add(property);
             }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return new Board(properties);

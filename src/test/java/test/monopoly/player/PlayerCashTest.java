@@ -11,21 +11,21 @@ public class PlayerCashTest {
     @Test
     public void playerHas1500CashByDefault() {
         Player player = new Player(0, new Board(40), new Dice());
-        assertEquals(1500, player.cash().value());
+        assertEquals(1500, player.cash.value());
     }
 
     @Test
     public void playerIsGiven200() {
         Player player = new Player(0, new Board(40), new Dice());
         player.give(200);
-        assertEquals(1700, player.cash().value());
+        assertEquals(1700, player.cash.value());
     }
 
     @Test
     public void playerPaysBack300() {
         Player player = new Player(0, new Board(40), new Dice());
         player.take(300);
-        assertEquals(1200, player.cash().value());
+        assertEquals(1200, player.cash.value());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PlayerCashTest {
         Player player = new Player(0, new Board(40), new Dice());
         player.give(500);
         player.take(400);
-        assertEquals(1600, player.cash().value());
+        assertEquals(1600, player.cash.value());
     }
 
     @Test
@@ -46,9 +46,9 @@ public class PlayerCashTest {
     @Test
     public void brokePlayerNotConsideredToBeInTheRed() {
         Player player = new Player(0, new Board(40), new Dice());
-        player.take(player.cash().value());
+        player.take(player.cash.value());
         assertFalse(player.inTheRed());
-        assertEquals(0, player.cash().value());
+        assertEquals(0, player.cash.value());
     }
 
     @Test
@@ -56,6 +56,6 @@ public class PlayerCashTest {
         Player player = new Player(0, new Board(40), new Dice());
         player.give(500);
         assertFalse(player.inTheRed());
-        assertEquals(2000, player.cash().value());
+        assertEquals(2000, player.cash.value());
     }
 }

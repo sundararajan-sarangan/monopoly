@@ -1,13 +1,8 @@
 package monopoly.board;
 
-import monopoly.tile.DevelopedLevel;
-import monopoly.tile.Group;
 import monopoly.tile.Property;
-import monopoly.tile.money.Costs;
-import monopoly.tile.money.Rents;
 
 import java.util.List;
-import java.util.Map;
 
 public class Board {
     private static final int MIN_TILES = 12;

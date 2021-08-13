@@ -6,14 +6,12 @@ import monopoly.tile.Group;
 import monopoly.tile.Property;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StandardBoardMakerTest {
 
     @Test
-    public void zeroethTileIsGoTile() throws FileNotFoundException {
+    public void zeroethTileIsGoTile() {
         Board board = new StandardBoardMaker().makeBoard();
         Property property = board.getPropertyAt(0);
         assertEquals(Group.NONE, property.group());
@@ -23,7 +21,7 @@ public class StandardBoardMakerTest {
     }
 
     @Test
-    public void firstTileIsMediterranean() throws FileNotFoundException {
+    public void firstTileIsMediterranean() {
         Board board = new StandardBoardMaker().makeBoard();
         Property property = board.getPropertyAt(1);
         assertEquals(Group.BROWN, property.group());
@@ -32,7 +30,7 @@ public class StandardBoardMakerTest {
     }
 
     @Test
-    public void fourthTileIsIncomeTax() throws FileNotFoundException {
+    public void fourthTileIsIncomeTax() {
         Board board = new StandardBoardMaker().makeBoard();
         Property property = board.getPropertyAt(4);
         assertEquals(Group.NONE, property.group());
@@ -42,7 +40,7 @@ public class StandardBoardMakerTest {
     }
 
     @Test
-    public void thirtyEighthTileIsLuxuryTax() throws FileNotFoundException {
+    public void thirtyEighthTileIsLuxuryTax() {
         Board board = new StandardBoardMaker().makeBoard();
         Property property = board.getPropertyAt(38);
         assertEquals(Group.NONE, property.group());
@@ -51,7 +49,7 @@ public class StandardBoardMakerTest {
     }
 
     @Test
-    public void thirtySixthTileIsChance() throws FileNotFoundException {
+    public void thirtySixthTileIsChance() {
         Board board = new StandardBoardMaker().makeBoard();
         Property property = board.getPropertyAt(36);
         assertEquals(Group.NONE, property.group());

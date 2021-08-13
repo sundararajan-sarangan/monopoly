@@ -13,7 +13,7 @@ public class PlayerPositionTest {
     @Test
     public void playerStartsAtPosition0() {
         Player player = new Player(0, null, null);
-        assertEquals(0, player.position());
+        assertEquals(0, player.position);
     }
 
     @Test
@@ -22,7 +22,7 @@ public class PlayerPositionTest {
         Board board = new Board(40);
         Player player = new Player(0, board, dice);
         player.rollDiceAndMove();
-        assertEquals(7, player.position());
+        assertEquals(7, player.position);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class PlayerPositionTest {
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.SIX, Die.SIX);
         Player player = new Player(36, board, dice);
         player.rollDiceAndMove();
-        assertEquals(8, player.position());
+        assertEquals(8, player.position);
     }
 
     private static class DiceTestStubThatAlwaysRolls extends Dice {
