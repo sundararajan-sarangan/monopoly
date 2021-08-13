@@ -14,7 +14,7 @@ public class Player {
     private final Dice dice;
     public int position;
     public final Cash cash;
-    private final List<Option> options;
+    private List<Option> options;
 
     public Player(int position, Board board, Dice dice) {
         this.dice = dice;
@@ -71,5 +71,21 @@ public class Player {
         Option option = new Option();
         option.move = Move.TURN_TO_PLAY;
         options.add(option);
+    }
+
+    public void payRentToOwnerOfPropertyAtCurrentPosition() {
+        int rent = board.getPropertyAt(position).rent(false);
+        this.take(rent);
+        board.getPropertyAt(position).owner().give(rent);
+        List<Option> newOptions = new ArrayList<>();
+        for(Option option : options) {
+            if(Move.PAY_RENT.equals(option.move)) {
+                continue;
+            }
+
+            newOptions.add(option);
+        }
+
+        options = newOptions;
     }
 }

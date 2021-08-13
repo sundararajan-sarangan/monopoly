@@ -23,6 +23,7 @@ public class StandardBoardMaker {
                     // This is a comment.
                     continue;
                 }
+
                 Costs costs = new Costs(
                         Integer.parseInt(record.get(4)),
                         Integer.parseInt(record.get(12)),
