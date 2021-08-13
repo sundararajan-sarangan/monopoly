@@ -11,8 +11,7 @@ import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerPositionTest {
     @Test
@@ -27,7 +26,7 @@ public class PlayerPositionTest {
         Board board = new StandardBoardMaker().makeBoard();
         Player player = new Player(0, board, dice);
         player.makeTurnToPlay();
-        player.rollDiceAndMove();
+        assertTrue(player.rollDiceAndMove());
         assertEquals(7, player.position);
     }
 
@@ -37,7 +36,7 @@ public class PlayerPositionTest {
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.SIX, Die.SIX);
         Player player = new Player(36, board, dice);
         player.makeTurnToPlay();
-        player.rollDiceAndMove();
+        assertTrue(player.rollDiceAndMove());
         assertEquals(8, player.position);
     }
 

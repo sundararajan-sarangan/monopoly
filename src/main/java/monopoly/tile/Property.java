@@ -64,7 +64,7 @@ public class Property {
     }
 
     public void visitedBy(Player player) {
-        if(player.equals(owner)) {
+        if(player.equals(owner) || this.group.equals(Group.NONE)) {
             return;
         }
 

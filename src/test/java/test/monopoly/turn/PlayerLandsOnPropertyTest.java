@@ -27,7 +27,7 @@ public class PlayerLandsOnPropertyTest {
         player.makeTurnToPlay();
 
         // When
-        player.rollDiceAndMove();
+        assertTrue(player.rollDiceAndMove());
 
         // Then
         assertTrue(playerCan(Move.BUY, player));
@@ -48,7 +48,7 @@ public class PlayerLandsOnPropertyTest {
         player.makeTurnToPlay();
 
         // When
-        player.rollDiceAndMove();
+        assertTrue(player.rollDiceAndMove());
 
         // Then
         assertTrue(playerCan(Move.PAY_RENT, player));
@@ -62,12 +62,31 @@ public class PlayerLandsOnPropertyTest {
 
         FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.FIVE, Die.ONE);
         Player player = new Player(0, board, dice);
+        player.makeTurnToPlay();
         board.getPropertyAt(6).setOwner(player);
 
         // When
-        player.rollDiceAndMove();
+        assertTrue(player.rollDiceAndMove());
 
         // Then
+        assertFalse(playerCan(Move.BUY, player));
+        assertFalse(playerCan(Move.PAY_RENT, player));
+    }
+
+    @Test
+    public void unOwnablePropertiesShouldntPresentOptionToBuyOrRent() {
+        // Given
+        Board board = makeStandardBoard();
+
+        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.FOUR, Die.THREE);
+        Player player = new Player(10, board, dice);
+        player.makeTurnToPlay();
+
+        // When
+        assertTrue(player.rollDiceAndMove());
+
+        // Then
+        assertEquals(17, player.position);
         assertFalse(playerCan(Move.BUY, player));
         assertFalse(playerCan(Move.PAY_RENT, player));
     }
