@@ -4,7 +4,7 @@ Go,Go,None,0,0,0,0,0,0,0,0,0,0,0
 Mediterranean Avenue,Street,Brown,1,60,50,2,10,30,90,160,250,30,2
 Community Chest,Chest,None,2,0,0,0,0,0,0,0,0,0,0
 Baltic Avenue,Street,Brown,3,60,50,4,20,60,180,320,450,30,2
-Income Tax,Tax,None,4,200,0,200,0,0,0,0,0,0,0
+Income Tax,Tax,None,4,0,0,200,0,0,0,0,0,0,0
 Reading Railroad,Rail_Road,Rail_Road,5,200,0,25,0,0,0,0,0,100,0
 Oriental Avenue,Street,Light_Blue,6,100,50,6,30,90,270,400,550,50,3
 Chance,Chance,None,7,0,0,0,0,0,0,0,0,0,0
@@ -38,5 +38,5 @@ Pennsylvania Avenue,Street,Green,34,320,200,28,150,450,1000,1200,1400,160,3
 Short Line,Rail_Road,Rail_Road,35,200,0,25,0,0,0,0,0,100,0
 Chance,Chance,None,36,0,0,0,0,0,0,0,0,0,0
 Park Place,Street,Dark_Blue,37,350,200,35,175,500,1100,1300,1500,175,2
-Luxury Tax,Tax,None,38,100,0,75,0,0,0,0,0,0,0
+Luxury Tax,Tax,None,38,100,0,100,0,0,0,0,0,0,0
 Boardwalk,Street,Dark_Blue,39,400,200,50,200,600,1400,1700,2000,200,2

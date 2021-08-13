@@ -38,6 +38,24 @@ public class StandardBoardMakerTest {
         assertEquals(Group.NONE, property.group());
         assertEquals("Income Tax", property.name());
         assertEquals(200, property.rent(false));
-        assertEquals(200, property.cost());
+        assertEquals(0, property.cost());
+    }
+
+    @Test
+    public void thirtyEighthTileIsLuxuryTax() throws FileNotFoundException {
+        Board board = new StandardBoardMaker().makeBoard();
+        Property property = board.getPropertyAt(38);
+        assertEquals(Group.NONE, property.group());
+        assertEquals("Luxury Tax", property.name());
+        assertEquals(100, property.rent(false));
+    }
+
+    @Test
+    public void thirtySixthTileIsChance() throws FileNotFoundException {
+        Board board = new StandardBoardMaker().makeBoard();
+        Property property = board.getPropertyAt(36);
+        assertEquals(Group.NONE, property.group());
+        assertEquals("Chance", property.name());
+        assertEquals(0, property.rent(false));
     }
 }
