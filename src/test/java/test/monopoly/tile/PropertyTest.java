@@ -19,7 +19,7 @@ public class PropertyTest {
     @BeforeEach
     public void init() {
         boardWalk = new Property("Boardwalk",
-                ColorGroup.DARK_BLUE,
+                Group.DARK_BLUE,
                 new Costs(440, 200, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 50,
                         DevelopedLevel.ONE_HOUSE, 200,
@@ -41,7 +41,7 @@ public class PropertyTest {
 
     @Test
     public void testColorGroup() {
-        assertEquals(ColorGroup.DARK_BLUE, boardWalk.colorGroup());
+        assertEquals(Group.DARK_BLUE, boardWalk.colorGroup());
     }
 
     @Test void testPropertyOwner() {

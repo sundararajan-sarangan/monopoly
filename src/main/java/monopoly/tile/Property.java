@@ -8,16 +8,16 @@ public class Property {
     private final Rents rents;
     private final String name;
     private final int cost;
-    private final ColorGroup colorGroup;
+    private final Group group;
     private Player owner;
 
     private DevelopedLevel developedLevel;
-    public Property(String name, ColorGroup colorGroup, Costs costs, Rents rents, DevelopedLevel developedLevel) {
+    public Property(String name, Group group, Costs costs, Rents rents, DevelopedLevel developedLevel) {
         this.name = name;
         this.cost = costs.cost();
         this.rents = rents;
         this.developedLevel = developedLevel;
-        this.colorGroup = colorGroup;
+        this.group = group;
     }
 
     public int rent(boolean ownerHasMonopoly) {
@@ -45,8 +45,8 @@ public class Property {
         return name;
     }
 
-    public ColorGroup colorGroup() {
-        return colorGroup;
+    public Group colorGroup() {
+        return group;
     }
 
     public void setOwner(Player owner) {

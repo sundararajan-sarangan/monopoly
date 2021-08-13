@@ -17,7 +17,7 @@ public class PropertyUpgradesTest {
     @BeforeEach
     public void init() {
         boardWalk = new Property("BoardWalk",
-                ColorGroup.DARK_BLUE,
+                Group.DARK_BLUE,
                 new Costs(440, 200, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 50,
                         DevelopedLevel.ONE_HOUSE, 200,

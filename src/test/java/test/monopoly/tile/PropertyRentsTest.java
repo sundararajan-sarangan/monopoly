@@ -3,7 +3,7 @@ package test.monopoly.tile;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.Player;
-import monopoly.tile.ColorGroup;
+import monopoly.tile.Group;
 import monopoly.tile.DevelopedLevel;
 import monopoly.tile.Property;
 import monopoly.tile.PropertyGroup;
@@ -24,7 +24,7 @@ public class PropertyRentsTest {
     @BeforeEach
     public void init() {
         boardwalk = new Property("Board Walk",
-                ColorGroup.DARK_BLUE,
+                Group.DARK_BLUE,
                 new Costs(440, 200, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 50,
                         DevelopedLevel.ONE_HOUSE, 200,
@@ -34,7 +34,7 @@ public class PropertyRentsTest {
                         DevelopedLevel.HOTEL, 2000)), DevelopedLevel.NO_HOUSES);
 
         parkPlace = new Property("Park Place",
-                ColorGroup.DARK_BLUE,
+                Group.DARK_BLUE,
                 new Costs(350, 175, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 35,
                         DevelopedLevel.ONE_HOUSE, 175,
@@ -47,7 +47,7 @@ public class PropertyRentsTest {
     @Test
     public void figureOutRentsOnGivenPropertyAndNoMonopoly() {
         List<Property> properties = List.of(boardwalk, parkPlace);
-        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
         Dice dice = new Dice();
         Player owner = new Player(0, new Board(40), dice);
         boardwalk.setOwner(owner);
@@ -57,7 +57,7 @@ public class PropertyRentsTest {
     @Test
     public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyButNoDevelopmentAnywhere() {
         List<Property> properties = List.of(boardwalk, parkPlace);
-        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
         Dice dice = new Dice();
         Player owner = new Player(0, new Board(40), dice);
         boardwalk.setOwner(owner);
@@ -68,7 +68,7 @@ public class PropertyRentsTest {
     @Test
     public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyAndPropertyIsDeveloped() {
         List<Property> properties = List.of(boardwalk, parkPlace);
-        PropertyGroup propertyGroup = new PropertyGroup(ColorGroup.DARK_BLUE, properties);
+        PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
         Dice dice = new Dice();
         Player owner = new Player(0, new Board(40), dice);
         boardwalk.setOwner(owner);

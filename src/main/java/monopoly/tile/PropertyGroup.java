@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PropertyGroup {
-    ColorGroup colorGroup;
+    Group group;
     List<Property> properties;
 
-    public PropertyGroup(ColorGroup colorGroup, List<Property> properties) {
-        this.colorGroup = colorGroup;
+    public PropertyGroup(Group group, List<Property> properties) {
+        this.group = group;
         this.properties = properties;
     }
 
