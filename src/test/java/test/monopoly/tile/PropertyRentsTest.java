@@ -2,6 +2,7 @@ package test.monopoly.tile;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
+import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.tile.Group;
 import monopoly.tile.DevelopedLevel;
@@ -49,7 +50,7 @@ public class PropertyRentsTest {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
         Dice dice = new Dice();
-        Player owner = new Player(0, new Board(40), dice);
+        Player owner = new Player(0, new StandardBoardMaker().makeBoard(), dice);
         boardwalk.setOwner(owner);
         assertEquals(50, boardwalk.rent(propertyGroup.oneOwnerHasMonopoly()));
     }
@@ -59,7 +60,7 @@ public class PropertyRentsTest {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
         Dice dice = new Dice();
-        Player owner = new Player(0, new Board(40), dice);
+        Player owner = new Player(0, new StandardBoardMaker().makeBoard(), dice);
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
         assertEquals(100, boardwalk.rent(propertyGroup.oneOwnerHasMonopoly()));
@@ -70,7 +71,7 @@ public class PropertyRentsTest {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
         Dice dice = new Dice();
-        Player owner = new Player(0, new Board(40), dice);
+        Player owner = new Player(0, new StandardBoardMaker().makeBoard(), dice);
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
         boardwalk.upgrade();

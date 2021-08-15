@@ -2,6 +2,7 @@ package test.monopoly.tile;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
+import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.tile.*;
 import monopoly.tile.money.Costs;
@@ -45,7 +46,7 @@ public class PropertyTest {
     }
 
     @Test void testPropertyOwner() {
-        Board board = new Board(40);
+        Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new Dice();
         Player owner = new Player(0, board, dice);
         boardWalk.setOwner(owner);

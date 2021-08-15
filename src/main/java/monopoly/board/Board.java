@@ -1,5 +1,6 @@
 package monopoly.board;
 
+import monopoly.dice.DiceResult;
 import monopoly.player.Player;
 import monopoly.tile.Group;
 import monopoly.tile.Property;
@@ -9,34 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private static final int MIN_TILES = 12;
-    private final int numberOfTiles;
-    private List<Property> properties;
-
-    public Board(int numberOfTiles) {
-        if(numberOfTiles < MIN_TILES) {
-            throw new RuntimeException();
-        }
-
-        this.numberOfTiles = numberOfTiles;
-    }
+    private final List<Property> properties;
 
     public Board(List<Property> properties) {
-        this(properties.size());
         this.properties = properties;
     }
 
-    public int getNewPosition(int currentPosition, int positionsToAdvanceBy) {
-        return (currentPosition + positionsToAdvanceBy) % numberOfTiles;
+    private int getNewPosition(int currentPosition, int positionsToAdvanceBy) {
+        return (currentPosition + positionsToAdvanceBy) % properties.size();
     }
 
-    public Property getPropertyAt(int i) {
-        return properties.get(i);
+    public Property getPropertyAt(int position) {
+        return properties.get(position);
     }
 
-    public void advancePlayer(Player player, int positionsToAdvanceBy) {
+    public void advancePlayer(Player player, DiceResult diceResult) {
         int oldPosition = player.position;
-        player.position = this.getNewPosition(player.position, positionsToAdvanceBy);
+        player.position = getNewPosition(player.position, diceResult.value());
         if(passedGo(player, oldPosition)) {
             player.give(200);
         }

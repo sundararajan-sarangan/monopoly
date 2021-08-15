@@ -1,5 +1,6 @@
 package monopoly.tile;
 
+import monopoly.board.Board;
 import monopoly.player.Player;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;

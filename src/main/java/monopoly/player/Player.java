@@ -27,28 +27,23 @@ public class Player {
     }
 
     public boolean rollDiceAndMove() {
-        DiceResult diceResult = rollDice();
-        if(diceResult != null) {
-            board.advancePlayer(this, diceResult.value());
-            return true;
+        if(!playersTurnToPlay()) {
+            return false;
         }
 
-        return false;
+        board.advancePlayer(this, dice.roll());
+        return true;
     }
 
     private boolean playersTurnToPlay() {
         return availableMoves.containsKey(Move.TURN_TO_PLAY);
     }
 
-    private DiceResult rollDice() {
-        return playersTurnToPlay() ? dice.roll() : null;
-    }
-
     public void give(int money) {
         cash.add(money);
     }
 
-    public void take(int money) {
+    public void takeAway(int money) {
         cash.subtract(money);
     }
 
@@ -71,17 +66,18 @@ public class Player {
 
     public void payRentToOwnerOfPropertyAtCurrentPosition() {
         Property property = board.getPropertyAt(position);
+        Player owner = property.owner();
         PropertyGroup propertyGroup = board.getPropertyGroup(property);
         boolean ownerHasMonopoly = propertyGroup.oneOwnerHasMonopoly();
         int rent = property.rent(ownerHasMonopoly);
-        this.take(rent);
-        board.getPropertyAt(position).owner().give(rent);
+        this.takeAway(rent);
+        owner.give(rent);
         availableMoves.remove(Move.PAY_RENT);
     }
 
     public boolean buyCurrentProperty() {
         Property property = board.getPropertyAt(position);
-        this.take(property.cost());
+        this.takeAway(property.cost());
         property.setOwner(this);
         availableMoves.remove(Move.BUY);
         return true;

@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PropertyGroupTest {
     private static Property boardwalk;
     private static Property parkPlace;
+    private static final Board DUMMY_BOARD = new Board(null);
+    private static final Dice DUMMY_DICE = new Dice();
 
     @BeforeEach
     public void init() {
@@ -45,7 +47,7 @@ public class PropertyGroupTest {
     public void sameOwnerForAllProperties() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner = new Player(0, new Board(40), new Dice());
+        Player owner = new Player(0, DUMMY_BOARD, DUMMY_DICE);
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
         assertTrue(propertyGroup.oneOwnerHasMonopoly());
@@ -55,9 +57,8 @@ public class PropertyGroupTest {
     public void differentOwnerForProperties() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Dice dice = new Dice();
-        Player owner1 = new Player(0, new Board(40), dice);
-        Player owner2 = new Player(0, new Board(40), dice);
+        Player owner1 = new Player(0, DUMMY_BOARD, DUMMY_DICE);
+        Player owner2 = new Player(0, DUMMY_BOARD, DUMMY_DICE);
         boardwalk.setOwner(owner1);
         boardwalk.setOwner(owner2);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
@@ -67,8 +68,7 @@ public class PropertyGroupTest {
     public void somePropertiesUnOwned() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Dice dice = new Dice();
-        Player owner = new Player(0, new Board(40), dice);
+        Player owner = new Player(0, DUMMY_BOARD, DUMMY_DICE);
         boardwalk.setOwner(owner);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
     }
