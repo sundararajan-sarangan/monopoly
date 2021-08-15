@@ -1,6 +1,5 @@
 package test.monopoly.turn;
 
-import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;

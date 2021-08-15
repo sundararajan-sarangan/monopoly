@@ -68,8 +68,6 @@ public class Property {
             return;
         }
 
-        Option option = new Option();
-        option.move = owner == null ? Move.BUY : Move.PAY_RENT;
-        player.addOption(option);
+        player.addOption(owner == null ? Move.BUY : Move.PAY_RENT, new Option());
     }
 }

@@ -69,12 +69,6 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
     }
 
     private boolean playerCan(Move move, Player player) {
-        for(Option option : player.currentOptions()) {
-            if(move.equals(option.move)) {
-                return true;
-            }
-        }
-
-        return false;
+        return player.hasOption(move);
     }
 }

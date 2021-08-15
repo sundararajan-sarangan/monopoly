@@ -9,22 +9,21 @@ import monopoly.tile.PropertyGroup;
 import monopoly.turn.Move;
 import monopoly.turn.Option;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Player {
     private final Board board;
     private final Dice dice;
     public int position;
     public final Cash cash;
-    private List<Option> options;
+    private final Map<Move, Option> availableMoves;
 
     public Player(int position, Board board, Dice dice) {
         this.dice = dice;
         this.board = board;
         this.position = position;
         this.cash = new Cash(1500);
-        this.options = new ArrayList<>();
+        this.availableMoves = new HashMap<>();
     }
 
     public boolean rollDiceAndMove() {
@@ -38,13 +37,7 @@ public class Player {
     }
 
     private boolean playersTurnToPlay() {
-        for(Option option : options) {
-            if(Move.TURN_TO_PLAY.equals(option.move)) {
-                return true;
-            }
-        }
-
-        return false;
+        return availableMoves.containsKey(Move.TURN_TO_PLAY);
     }
 
     private DiceResult rollDice() {
@@ -63,18 +56,17 @@ public class Player {
         return cash.isNegativeBalance();
     }
 
-    public List<Option> currentOptions() {
-        return options;
+    public Set<Move> currentOptions() {
+        return availableMoves.keySet();
     }
 
-    public void addOption(Option option) {
-        this.options.add(option);
+    public void addOption(Move move, Option option) {
+        this.availableMoves.put(move, option);
     }
 
     public void makeTurnToPlay() {
         Option option = new Option();
-        option.move = Move.TURN_TO_PLAY;
-        options.add(option);
+        availableMoves.put(Move.TURN_TO_PLAY, option);
     }
 
     public void payRentToOwnerOfPropertyAtCurrentPosition() {
@@ -84,46 +76,22 @@ public class Player {
         int rent = property.rent(ownerHasMonopoly);
         this.take(rent);
         board.getPropertyAt(position).owner().give(rent);
-        List<Option> newOptions = new ArrayList<>();
-        for(Option option : options) {
-            if(Move.PAY_RENT.equals(option.move)) {
-                continue;
-            }
-
-            newOptions.add(option);
-        }
-
-        options = newOptions;
+        availableMoves.remove(Move.PAY_RENT);
     }
 
     public boolean buyCurrentProperty() {
         Property property = board.getPropertyAt(position);
         this.take(property.cost());
         property.setOwner(this);
-        List<Option> newOptions = new ArrayList<>();
-        for(Option option : options) {
-            if(Move.BUY.equals(option.move)) {
-                continue;
-            }
-
-            newOptions.add(option);
-        }
-
-        options = newOptions;
+        availableMoves.remove(Move.BUY);
         return true;
     }
 
     public boolean hasOption(Move move) {
-        for(Option option : options) {
-            if(move.equals(option.move)) {
-                return true;
-            }
-        }
-
-        return false;
+        return availableMoves.containsKey(move);
     }
 
     public void endTurn() {
-        options = new ArrayList<>();
+        availableMoves.clear();
     }
 }
