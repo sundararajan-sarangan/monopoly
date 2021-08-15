@@ -66,12 +66,9 @@ public class Player {
 
     public void payRentToOwnerOfPropertyAtCurrentPosition() {
         Property property = board.getPropertyAt(position);
-        Player owner = property.owner();
-        PropertyGroup propertyGroup = board.getPropertyGroup(property);
-        boolean ownerHasMonopoly = propertyGroup.oneOwnerHasMonopoly();
-        int rent = property.rent(ownerHasMonopoly);
+        int rent = property.rent(board);
         this.takeAway(rent);
-        owner.give(rent);
+        property.owner().give(rent);
         availableMoves.remove(Move.PAY_RENT);
     }
 
