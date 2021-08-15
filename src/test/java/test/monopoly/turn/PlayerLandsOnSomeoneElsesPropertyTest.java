@@ -32,12 +32,39 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
 
         // When
         renter.rollDiceAndMove();
-
-        // Then
         assertTrue(playerCan(Move.PAY_RENT, renter));
         renter.payRentToOwnerOfPropertyAtCurrentPosition();
-        assertEquals(1500 - indianaAvenue.rent(false), renter.cash.value());
-        assertEquals(1500 + indianaAvenue.rent(false), owner.cash.value());
+
+        // Then
+        assertEquals(1482, renter.cash.value());
+        assertEquals(1518, owner.cash.value());
+        assertFalse(playerCan(Move.PAY_RENT, renter));
+    }
+
+    @Test
+    public void playerPaysDoubleRentIfOwnerOwnsAllPropertiesOfTheSameColorGroup() {
+        // Given
+        Board board = new StandardBoardMaker().makeBoard();
+        Dice dummyDice = new Dice();
+        Player owner = new Player(0, board, dummyDice);
+        Property kentuckyAvenue = board.getPropertyAt(21);
+        kentuckyAvenue.setOwner(owner);
+        Property indianaAvenue = board.getPropertyAt(23);
+        indianaAvenue.setOwner(owner);
+        Property illinoisAvenue = board.getPropertyAt(24);
+        illinoisAvenue.setOwner(owner);
+
+        FakeDiceWithResultsQueuedUp diceThatRollsThree = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.ONE, Die.TWO)));
+        Player renter = new Player(20, board, diceThatRollsThree);
+        renter.makeTurnToPlay();
+
+        // When
+        renter.rollDiceAndMove();
+        renter.payRentToOwnerOfPropertyAtCurrentPosition();
+
+        // Then
+        assertEquals(1464, renter.cash.value());
+        assertEquals(1536, owner.cash.value());
         assertFalse(playerCan(Move.PAY_RENT, renter));
     }
 

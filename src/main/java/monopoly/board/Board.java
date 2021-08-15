@@ -1,8 +1,11 @@
 package monopoly.board;
 
 import monopoly.player.Player;
+import monopoly.tile.Group;
 import monopoly.tile.Property;
+import monopoly.tile.PropertyGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
@@ -35,5 +38,17 @@ public class Board {
         player.position = this.getNewPosition(player.position, positionsToAdvanceBy);
         Property property = this.getPropertyAt(player.position);
         property.visitedBy(player);
+    }
+
+    public PropertyGroup getPropertyGroup(Property property) {
+        Group group = property.group();
+        List<Property> propertiesInTheSameGroup = new ArrayList<>();
+        for(Property p : properties) {
+            if(group.equals(p.group())) {
+                propertiesInTheSameGroup.add(p);
+            }
+        }
+
+        return new PropertyGroup(group, propertiesInTheSameGroup);
     }
 }

@@ -3,6 +3,8 @@ package monopoly.player;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.money.Cash;
+import monopoly.tile.Property;
+import monopoly.tile.PropertyGroup;
 import monopoly.turn.Move;
 import monopoly.turn.Option;
 
@@ -74,7 +76,10 @@ public class Player {
     }
 
     public void payRentToOwnerOfPropertyAtCurrentPosition() {
-        int rent = board.getPropertyAt(position).rent(false);
+        Property property = board.getPropertyAt(position);
+        PropertyGroup propertyGroup = board.getPropertyGroup(property);
+        boolean ownerHasMonopoly = propertyGroup.oneOwnerHasMonopoly();
+        int rent = property.rent(ownerHasMonopoly);
         this.take(rent);
         board.getPropertyAt(position).owner().give(rent);
         List<Option> newOptions = new ArrayList<>();
@@ -87,5 +92,22 @@ public class Player {
         }
 
         options = newOptions;
+    }
+
+    public boolean buyCurrentProperty() {
+        Property property = board.getPropertyAt(position);
+        this.take(property.cost());
+        property.setOwner(this);
+        List<Option> newOptions = new ArrayList<>();
+        for(Option option : options) {
+            if(Move.BUY.equals(option.move)) {
+                continue;
+            }
+
+            newOptions.add(option);
+        }
+
+        options = newOptions;
+        return true;
     }
 }
