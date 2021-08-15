@@ -35,7 +35,12 @@ public class Board {
     }
 
     public void advancePlayer(Player player, int positionsToAdvanceBy) {
+        int oldPosition = player.position;
         player.position = this.getNewPosition(player.position, positionsToAdvanceBy);
+        if(passedGo(player, oldPosition)) {
+            player.give(200);
+        }
+
         Property property = this.getPropertyAt(player.position);
         property.visitedBy(player);
     }
@@ -50,5 +55,9 @@ public class Board {
         }
 
         return new PropertyGroup(group, propertiesInTheSameGroup);
+    }
+
+    private boolean passedGo(Player player, int oldPosition) {
+        return player.position < oldPosition;
     }
 }

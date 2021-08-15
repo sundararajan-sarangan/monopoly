@@ -2,6 +2,7 @@ package monopoly.player;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
+import monopoly.dice.DiceResult;
 import monopoly.player.money.Cash;
 import monopoly.tile.Property;
 import monopoly.tile.PropertyGroup;
@@ -27,8 +28,9 @@ public class Player {
     }
 
     public boolean rollDiceAndMove() {
-        if(playersTurnToPlay()) {
-            board.advancePlayer(this, positionsToAdvanceBy());
+        DiceResult diceResult = rollDice();
+        if(diceResult != null) {
+            board.advancePlayer(this, diceResult.value());
             return true;
         }
 
@@ -45,8 +47,8 @@ public class Player {
         return false;
     }
 
-    private int positionsToAdvanceBy() {
-        return dice.roll().value();
+    private DiceResult rollDice() {
+        return playersTurnToPlay() ? dice.roll() : null;
     }
 
     public void give(int money) {
