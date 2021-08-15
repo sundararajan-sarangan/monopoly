@@ -112,4 +112,18 @@ public class Player {
         options = newOptions;
         return true;
     }
+
+    public boolean hasOption(Move move) {
+        for(Option option : options) {
+            if(move.equals(option.move)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void endTurn() {
+        options = new ArrayList<>();
+    }
 }
