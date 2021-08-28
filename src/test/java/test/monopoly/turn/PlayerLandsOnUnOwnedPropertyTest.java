@@ -5,8 +5,6 @@ import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
-import monopoly.turn.Move;
-import monopoly.turn.Option;
 import org.junit.jupiter.api.Test;
 import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
@@ -26,18 +24,14 @@ public class PlayerLandsOnUnOwnedPropertyTest {
         player.makeTurnToPlay();
 
         player.rollDiceAndMove();
-        assertTrue(playerCan(Move.BUY, player));
+        assertTrue(player.canBuy());
 
         // When
         assertTrue(player.buyCurrentProperty());
 
         // Then
         assertEquals(1200, player.cash.value());
-        assertFalse(playerCan(Move.BUY, player));
+        assertFalse(player.canBuy());
         assertEquals(player, board.getPropertyAt(32).owner());
-    }
-
-    private boolean playerCan(Move move, Player player) {
-        return player.hasOption(move);
     }
 }

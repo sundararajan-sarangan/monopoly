@@ -7,8 +7,6 @@ import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.tile.Property;
-import monopoly.turn.Move;
-import monopoly.turn.Option;
 import org.junit.jupiter.api.Test;
 import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
@@ -32,13 +30,13 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
 
         // When
         renter.rollDiceAndMove();
-        assertTrue(playerCan(Move.PAY_RENT, renter));
+        assertTrue(renter.canPayRent());
         renter.payRentToOwnerOfPropertyAtCurrentPosition();
 
         // Then
         assertEquals(1482, renter.cash.value());
         assertEquals(1518, owner.cash.value());
-        assertFalse(playerCan(Move.PAY_RENT, renter));
+        assertFalse(renter.canPayRent());
     }
 
     @Test
@@ -65,10 +63,6 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
         // Then
         assertEquals(1464, renter.cash.value());
         assertEquals(1536, owner.cash.value());
-        assertFalse(playerCan(Move.PAY_RENT, renter));
-    }
-
-    private boolean playerCan(Move move, Player player) {
-        return player.hasOption(move);
+        assertFalse(renter.canPayRent());
     }
 }

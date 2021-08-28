@@ -2,10 +2,8 @@ package monopoly.player;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
-import monopoly.dice.DiceResult;
 import monopoly.player.money.Cash;
 import monopoly.tile.Property;
-import monopoly.tile.PropertyGroup;
 import monopoly.turn.Move;
 import monopoly.turn.Option;
 
@@ -90,5 +88,13 @@ public class Player {
 
     public void endTurn() {
         availableMoves.clear();
+    }
+
+    public boolean canBuy() {
+        return availableMoves.containsKey(Move.BUY);
+    }
+
+    public boolean canPayRent() {
+        return availableMoves.containsKey(Move.PAY_RENT);
     }
 }
