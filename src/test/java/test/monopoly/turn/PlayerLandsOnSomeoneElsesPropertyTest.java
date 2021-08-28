@@ -7,6 +7,7 @@ import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.tile.Property;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
@@ -24,9 +25,7 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
         Property indianaAvenue = board.getPropertyAt(23);
         indianaAvenue.setOwner(owner);
 
-        FakeDiceWithResultsQueuedUp diceThatRollsThree = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.TWO, Die.ONE)));
-        Player renter = new Player(20, board, diceThatRollsThree);
-        renter.makeTurnToPlay();
+        Player renter = getPlayerAtPosition20AboutToRoll3(board);
 
         // When
         renter.rollDiceAndMove();
@@ -52,9 +51,7 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
         Property illinoisAvenue = board.getPropertyAt(24);
         illinoisAvenue.setOwner(owner);
 
-        FakeDiceWithResultsQueuedUp diceThatRollsThree = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.ONE, Die.TWO)));
-        Player renter = new Player(20, board, diceThatRollsThree);
-        renter.makeTurnToPlay();
+        Player renter = getPlayerAtPosition20AboutToRoll3(board);
 
         // When
         renter.rollDiceAndMove();
@@ -64,5 +61,16 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
         assertEquals(1464, renter.cash.value());
         assertEquals(1536, owner.cash.value());
         assertFalse(renter.canPayRent());
+    }
+
+    @NotNull
+    private Player getPlayerAtPosition20AboutToRoll3(Board board) {
+        FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.THREE, Die.FIVE), new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.ONE, Die.TWO)));
+        Player renter = new Player(board, dice);
+        renter.makeTurnToPlay();
+        renter.rollDiceAndMove();
+        renter.rollDiceAndMove();
+        assertEquals(20, renter.position);
+        return renter;
     }
 }
