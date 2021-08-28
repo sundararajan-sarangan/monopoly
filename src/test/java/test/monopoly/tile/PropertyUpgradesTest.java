@@ -20,7 +20,7 @@ public class PropertyUpgradesTest {
     public void init() {
         board = new StandardBoardMaker().makeBoard();
         boardWalk = board.getPropertyAt(39);
-        owner = new Player(0, board, new Dice());
+        owner = new Player(board, new Dice());
         boardWalk.setOwner(owner);
     }
 

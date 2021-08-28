@@ -48,7 +48,7 @@ public class PropertyTest {
     @Test void testPropertyOwner() {
         Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new Dice();
-        Player owner = new Player(0, board, dice);
+        Player owner = new Player(board, dice);
         boardWalk.setOwner(owner);
         assertEquals(owner, boardWalk.owner());
     }

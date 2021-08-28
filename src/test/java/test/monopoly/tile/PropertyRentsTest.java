@@ -27,7 +27,7 @@ public class PropertyRentsTest {
     @BeforeEach
     public void init() {
         board = new StandardBoardMaker().makeBoard();
-        owner = new Player(0, board, new Dice());
+        owner = new Player(board, new Dice());
         boardwalk = board.getPropertyAt(39);
         parkPlace = board.getPropertyAt(37);
     }

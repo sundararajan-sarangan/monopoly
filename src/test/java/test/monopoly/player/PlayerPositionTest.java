@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerPositionTest {
     @Test
     public void playerStartsAtPosition0() {
-        Player player = new Player(0, null, null);
+        Player player = new Player(null, null);
         assertEquals(0, player.position);
     }
 
@@ -24,7 +24,7 @@ public class PlayerPositionTest {
     public void playerRollsDiceMovesThemForward() {
         Dice dice = new DiceTestStubThatAlwaysRolls(Die.ONE, Die.SIX);
         Board board = new StandardBoardMaker().makeBoard();
-        Player player = new Player(0, board, dice);
+        Player player = new Player(board, dice);
         player.makeTurnToPlay();
         assertTrue(player.rollDiceAndMove());
         assertEquals(7, player.position);
@@ -44,7 +44,7 @@ public class PlayerPositionTest {
     public void playerCannotRollDiceIfItsNotTheirTurn() {
         Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.FIVE, Die.FOUR)));
-        Player player = new Player(0, board, dice);
+        Player player = new Player(board, dice);
         assertFalse(player.rollDiceAndMove());
         assertEquals(0, player.position);
     }

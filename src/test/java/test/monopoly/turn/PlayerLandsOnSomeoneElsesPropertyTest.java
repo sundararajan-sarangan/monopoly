@@ -22,7 +22,7 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
         // Given
         Board board = new StandardBoardMaker().makeBoard();
         Dice dummyDice = new Dice();
-        Player owner = new Player(0, board, dummyDice);
+        Player owner = new Player(board, dummyDice);
         Property indianaAvenue = board.getPropertyAt(23);
         indianaAvenue.setOwner(owner);
 
@@ -46,7 +46,7 @@ public class PlayerLandsOnSomeoneElsesPropertyTest {
         // Given
         Board board = new StandardBoardMaker().makeBoard();
         Dice dummyDice = new Dice();
-        Player owner = new Player(0, board, dummyDice);
+        Player owner = new Player(board, dummyDice);
         Property kentuckyAvenue = board.getPropertyAt(21);
         kentuckyAvenue.setOwner(owner);
         Property indianaAvenue = board.getPropertyAt(23);

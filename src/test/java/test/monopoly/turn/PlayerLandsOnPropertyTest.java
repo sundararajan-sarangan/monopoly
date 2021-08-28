@@ -23,7 +23,7 @@ public class PlayerLandsOnPropertyTest {
         // Given
         Board board = makeStandardBoard();
         FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.TWO, Die.ONE);
-        Player player = new Player(0, board, dice);
+        Player player = new Player(board, dice);
         player.makeTurnToPlay();
 
         // When
@@ -40,11 +40,11 @@ public class PlayerLandsOnPropertyTest {
         Board board = makeStandardBoard();
 
         Dice dummyDice = new Dice();
-        Player existingOwner = new Player(0, board, dummyDice);
+        Player existingOwner = new Player(board, dummyDice);
         board.getPropertyAt(3).setOwner(existingOwner);
 
         FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.ONE, Die.TWO);
-        Player player = new Player(0, board, dice);
+        Player player = new Player(board, dice);
         player.makeTurnToPlay();
 
         // When
@@ -61,7 +61,7 @@ public class PlayerLandsOnPropertyTest {
         Board board = makeStandardBoard();
 
         FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.FIVE, Die.ONE);
-        Player player = new Player(0, board, dice);
+        Player player = new Player(board, dice);
         player.makeTurnToPlay();
         board.getPropertyAt(6).setOwner(player);
 

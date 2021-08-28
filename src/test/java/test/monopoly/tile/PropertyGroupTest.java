@@ -47,7 +47,7 @@ public class PropertyGroupTest {
     public void sameOwnerForAllProperties() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner = new Player(0, DUMMY_BOARD, DUMMY_DICE);
+        Player owner = new Player(DUMMY_BOARD, DUMMY_DICE);
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
         assertTrue(propertyGroup.oneOwnerHasMonopoly());
@@ -57,8 +57,8 @@ public class PropertyGroupTest {
     public void differentOwnerForProperties() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner1 = new Player(0, DUMMY_BOARD, DUMMY_DICE);
-        Player owner2 = new Player(0, DUMMY_BOARD, DUMMY_DICE);
+        Player owner1 = new Player(DUMMY_BOARD, DUMMY_DICE);
+        Player owner2 = new Player(DUMMY_BOARD, DUMMY_DICE);
         boardwalk.setOwner(owner1);
         boardwalk.setOwner(owner2);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
@@ -68,7 +68,7 @@ public class PropertyGroupTest {
     public void somePropertiesUnOwned() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner = new Player(0, DUMMY_BOARD, DUMMY_DICE);
+        Player owner = new Player(DUMMY_BOARD, DUMMY_DICE);
         boardwalk.setOwner(owner);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
     }

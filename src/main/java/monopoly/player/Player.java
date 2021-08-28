@@ -18,6 +18,10 @@ public class Player {
     public final Cash cash;
     private final Map<Move, Option> availableMoves;
 
+    public Player(Board board, Dice dice) {
+        this(0, board, dice);
+    }
+
     public Player(int position, Board board, Dice dice) {
         this.dice = dice;
         this.board = board;
