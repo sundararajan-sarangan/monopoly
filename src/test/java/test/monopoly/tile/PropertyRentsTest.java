@@ -35,14 +35,14 @@ public class PropertyRentsTest {
     @Test
     public void figureOutRentsOnGivenPropertyAndNoMonopoly() {
         boardwalk.setOwner(owner);
-        assertEquals(50, boardwalk.rent(board));
+        assertEquals(50, board.rentFor(boardwalk));
     }
 
     @Test
     public void figureOutRentsOnGivenPropertyWhenOwnerHasMonopolyButNoDevelopmentAnywhere() {
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
-        assertEquals(100, boardwalk.rent(board));
+        assertEquals(100, board.rentFor(boardwalk));
     }
 
     @Test
@@ -50,12 +50,12 @@ public class PropertyRentsTest {
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
         boardwalk.upgrade();
-        assertEquals(200, boardwalk.rent(board));
-        assertEquals(70, parkPlace.rent(board));
+        assertEquals(200, board.rentFor(boardwalk));
+        assertEquals(70, board.rentFor(parkPlace));
     }
 
     @Test
     public void rentShouldBeZeroIfNoneOwnsTheProperty() {
-        assertEquals(0, boardwalk.rent(board));
+        assertEquals(0, board.rentFor(boardwalk));
     }
 }

@@ -66,7 +66,7 @@ public class Player {
 
     public void payRentToOwnerOfPropertyAtCurrentPosition() {
         Property property = board.getPropertyAt(position);
-        int rent = property.rent(board);
+        int rent = board.rentFor(property);
         this.takeAway(rent);
         property.owner().give(rent);
         availableMoves.remove(Move.PAY_RENT);

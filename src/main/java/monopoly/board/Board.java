@@ -50,4 +50,18 @@ public class Board {
     private boolean passedGo(Player player, int oldPosition) {
         return player.position < oldPosition;
     }
+
+    public int rentFor(Property property) {
+        if(null == property.owner()) {
+            return 0;
+        }
+
+        boolean ownerHasMonopoly = getPropertyGroup(property).oneOwnerHasMonopoly();
+        int rent = property.rent();
+        if(property.isUnimproved() && ownerHasMonopoly) {
+            rent = rent * 2;
+        }
+
+        return rent;
+    }
 }

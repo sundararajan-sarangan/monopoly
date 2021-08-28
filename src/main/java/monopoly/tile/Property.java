@@ -23,21 +23,7 @@ public class Property {
         this.group = group;
     }
 
-    public int rent(Board board) {
-        if(null == this.owner) {
-            return 0;
-        }
-
-        boolean ownerHasMonopoly = board.getPropertyGroup(this).oneOwnerHasMonopoly();
-        int rent = getRentForTheCurrentlyDevelopedLevel();
-        if(isUnimproved() && ownerHasMonopoly) {
-            rent = rent * 2;
-        }
-
-        return rent;
-    }
-
-    private Integer getRentForTheCurrentlyDevelopedLevel() {
+    public int rent() {
         return rents.developedLevelToRentMap().get(developedLevel);
     }
 
