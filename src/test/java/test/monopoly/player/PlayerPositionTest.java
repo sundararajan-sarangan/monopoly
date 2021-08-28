@@ -32,10 +32,17 @@ public class PlayerPositionTest {
 
     @Test
     public void playerPositionWrapsAroundTheBoard() {
+        // Given
         Board board = new StandardBoardMaker().makeBoard();
-        Dice dice = new DiceTestStubThatAlwaysRolls(Die.SIX, Die.SIX);
-        Player player = new Player(36, board, dice);
+        Dice dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.FIVE, Die.FOUR), new DiceResult(Die.TWO, Die.ONE), new DiceResult(Die.SIX, Die.SIX)));
+        Player player = new Player(board, dice);
         player.makeTurnToPlay();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+
+        // When and Then
         assertTrue(player.rollDiceAndMove());
         assertEquals(8, player.position);
     }

@@ -12,7 +12,7 @@ public class PlayerEndsTurnTest {
     @Test
     public void playerEndsTurnTest() {
         // Given
-        Player player = new Player(5, new StandardBoardMaker().makeBoard(), new Dice());
+        Player player = new Player(new StandardBoardMaker().makeBoard(), new Dice());
         player.makeTurnToPlay();
         assertTrue(player.hasOption(Move.TURN_TO_PLAY));
 

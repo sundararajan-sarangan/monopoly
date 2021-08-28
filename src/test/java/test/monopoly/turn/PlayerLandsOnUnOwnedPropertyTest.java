@@ -19,10 +19,11 @@ public class PlayerLandsOnUnOwnedPropertyTest {
         // Given
         Board board = new StandardBoardMaker().makeBoard();
 
-        FakeDiceWithResultsQueuedUp diceThatRollsEleven = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.SIX, Die.FIVE)));
-        Player player = new Player(21, board, diceThatRollsEleven);
+        FakeDiceWithResultsQueuedUp diceThatRollsEleven = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.FIVE, Die.FOUR), new DiceResult(Die.SIX, Die.FIVE)));
+        Player player = new Player(board, diceThatRollsEleven);
         player.makeTurnToPlay();
-
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
         player.rollDiceAndMove();
         assertTrue(player.canBuy());
 

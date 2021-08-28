@@ -17,13 +17,8 @@ public class Player {
     private final Map<Move, Option> availableMoves;
 
     public Player(Board board, Dice dice) {
-        this(0, board, dice);
-    }
-
-    public Player(int position, Board board, Dice dice) {
         this.dice = dice;
         this.board = board;
-        this.position = position;
         this.cash = new Cash(1500);
         this.availableMoves = new HashMap<>();
     }

@@ -17,10 +17,14 @@ public class PlayerCashAfterTheyPassGoTest {
     public void playerPassesGoIncreasesTheirCashBy200() {
         // Given
         Board board = new StandardBoardMaker().makeBoard();
-        FakeDiceWithResultsQueuedUp diceThatRollsFour = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.TWO, Die.TWO)));
-        Player player = new Player(37, board, diceThatRollsFour);
+        FakeDiceWithResultsQueuedUp diceThatRollsFour = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.FOUR, Die.SIX), new DiceResult(Die.ONE, Die.TWO) , new DiceResult(Die.TWO, Die.TWO)));
+        Player player = new Player(board, diceThatRollsFour);
         assertEquals(1500, player.cash.value());
         player.makeTurnToPlay();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
 
         // When
         player.rollDiceAndMove();

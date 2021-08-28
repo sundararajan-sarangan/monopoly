@@ -7,8 +7,6 @@ import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.turn.Move;
-import monopoly.turn.Option;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
@@ -22,7 +20,8 @@ public class PlayerLandsOnPropertyTest {
     public void shouldPresentTheOptionToBuyWhenPropertyIsUnowned() {
         // Given
         Board board = makeStandardBoard();
-        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.TWO, Die.ONE);
+        DiceResult diceResult = new DiceResult(Die.TWO, Die.ONE);
+        FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(diceResult));
         Player player = new Player(board, dice);
         player.makeTurnToPlay();
 
@@ -43,7 +42,8 @@ public class PlayerLandsOnPropertyTest {
         Player existingOwner = new Player(board, dummyDice);
         board.getPropertyAt(3).setOwner(existingOwner);
 
-        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.ONE, Die.TWO);
+        DiceResult diceResult = new DiceResult(Die.ONE, Die.TWO);
+        FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(diceResult));
         Player player = new Player(board, dice);
         player.makeTurnToPlay();
 
@@ -60,7 +60,8 @@ public class PlayerLandsOnPropertyTest {
         // Given
         Board board = makeStandardBoard();
 
-        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.FIVE, Die.ONE);
+        DiceResult diceResult = new DiceResult(Die.FIVE, Die.ONE);
+        FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(diceResult));
         Player player = new Player(board, dice);
         player.makeTurnToPlay();
         board.getPropertyAt(6).setOwner(player);
@@ -78,9 +79,10 @@ public class PlayerLandsOnPropertyTest {
         // Given
         Board board = makeStandardBoard();
 
-        FakeDiceWithResultsQueuedUp dice = makeFakeDiceWithResultsQueuedUp(Die.FOUR, Die.THREE);
-        Player player = new Player(10, board, dice);
+        FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.SIX, Die.FOUR), new DiceResult(Die.FOUR, Die.THREE)));
+        Player player = new Player(board, dice);
         player.makeTurnToPlay();
+        player.rollDiceAndMove();
 
         // When
         assertTrue(player.rollDiceAndMove());
@@ -89,12 +91,6 @@ public class PlayerLandsOnPropertyTest {
         assertEquals(17, player.position);
         assertFalse(playerCan(Move.BUY, player));
         assertFalse(playerCan(Move.PAY_RENT, player));
-    }
-
-    @NotNull
-    private FakeDiceWithResultsQueuedUp makeFakeDiceWithResultsQueuedUp(Die die1, Die die2) {
-        DiceResult diceResult = new DiceResult(die1, die2);
-        return new FakeDiceWithResultsQueuedUp(List.of(diceResult));
     }
 
     private Board makeStandardBoard() {
