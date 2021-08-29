@@ -15,6 +15,7 @@ public class Property {
     private Player owner;
 
     private DevelopedLevel developedLevel;
+
     public Property(String name, Group group, Costs costs, Rents rents, DevelopedLevel developedLevel) {
         this.name = name;
         this.cost = costs.cost();
@@ -56,7 +57,14 @@ public class Property {
     }
 
     public void visitedBy(Player player) {
-        if(player.equals(owner) || this.group.equals(Group.NONE)) {
+        if (player.equals(owner)) {
+            return;
+        }
+
+        if (this.group.equals(Group.NONE)) {
+            if ("Go To Jail".equals(this.name)) {
+                player.position = 10;
+            }
             return;
         }
 
