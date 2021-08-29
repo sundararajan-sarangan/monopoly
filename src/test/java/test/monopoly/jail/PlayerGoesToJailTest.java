@@ -51,4 +51,22 @@ public class PlayerGoesToJailTest {
         // Then
         assertEquals(10, player.position);
     }
+
+    @Test
+    public void playerGoesToJailIfMostRecentThreeRollsAreDoubles() {
+        // Given
+        Board board = new StandardBoardMaker().makeBoard();
+        Dice dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.FOUR, Die.THREE), new DiceResult(Die.FIVE, Die.FIVE), new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.ONE, Die.ONE)));
+        Player player = new Player(board, dice);
+        player.makeTurnToPlay();
+
+        // When
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+
+        // Then
+        assertEquals(10, player.position);
+    }
 }
