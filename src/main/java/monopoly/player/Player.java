@@ -2,6 +2,7 @@ package monopoly.player;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
+import monopoly.dice.DiceResult;
 import monopoly.player.money.Cash;
 import monopoly.tile.Property;
 import monopoly.turn.Move;
@@ -15,20 +16,30 @@ public class Player {
     public int position;
     public final Cash cash;
     private final Map<Move, Option> availableMoves;
+    private final DieRollHistory dieRollHistory;
 
     public Player(Board board, Dice dice) {
         this.dice = dice;
         this.board = board;
         this.cash = new Cash(1500);
         this.availableMoves = new HashMap<>();
+        this.dieRollHistory = new DieRollHistory();
     }
 
     public boolean rollDiceAndMove() {
-        if(!playersTurnToPlay()) {
+        if (!playersTurnToPlay()) {
             return false;
         }
 
-        board.advancePlayer(this, dice.roll());
+        DiceResult diceResult = dice.roll();
+        dieRollHistory.add(diceResult);
+
+        if (dieRollHistory.areLastThreeDoubles()) {
+            position = 10;
+            return true;
+        }
+
+        board.advancePlayer(this, diceResult);
         return true;
     }
 

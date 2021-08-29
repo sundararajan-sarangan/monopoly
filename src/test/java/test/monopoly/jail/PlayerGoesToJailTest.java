@@ -34,4 +34,21 @@ public class PlayerGoesToJailTest {
         assertFalse(player.currentOptions().contains(Move.BUY));
         assertFalse(player.currentOptions().contains(Move.PAY_RENT));
     }
+
+    @Test
+    public void playerGoesToJailIfTheyRollThreeConsecutiveDoubles() {
+        // Given
+        Board board = new StandardBoardMaker().makeBoard();
+        Dice dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.FIVE, Die.FIVE), new DiceResult(Die.SIX, Die.SIX), new DiceResult(Die.ONE, Die.ONE)));
+        Player player = new Player(board, dice);
+        player.makeTurnToPlay();
+
+        // When
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+        player.rollDiceAndMove();
+
+        // Then
+        assertEquals(10, player.position);
+    }
 }
