@@ -1,6 +1,5 @@
 package monopoly.tile;
 
-import monopoly.board.Board;
 import monopoly.player.Player;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
@@ -62,9 +61,6 @@ public class Property {
         }
 
         if (this.group.equals(Group.NONE)) {
-            if ("Go To Jail".equals(this.name)) {
-                player.position = 10;
-            }
             return;
         }
 
