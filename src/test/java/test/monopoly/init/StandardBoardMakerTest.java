@@ -2,6 +2,7 @@ package test.monopoly.init;
 
 import monopoly.board.Board;
 import monopoly.init.GoToJailProperty;
+import monopoly.init.NoneProperty;
 import monopoly.init.StandardBoardMaker;
 import monopoly.init.StandardBoardPropertyFactory;
 import monopoly.tile.Group;
@@ -53,13 +54,5 @@ public class StandardBoardMakerTest {
         Property property = board.getPropertyAt(36);
         assertEquals(Group.NONE, property.group());
         assertEquals("Chance", property.name());
-    }
-
-    @Test
-    public void GoToJailPropertyIsOfTypeGoToJail() {
-        Board board = new StandardBoardMaker(new StandardBoardPropertyFactory()).makeBoard();
-        Property property = board.getPropertyAt(30);
-        assertEquals("Go To Jail", property.name());
-        assertEquals(property.getClass(), GoToJailProperty.class);
     }
 }

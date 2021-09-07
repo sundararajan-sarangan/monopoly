@@ -7,13 +7,11 @@ import monopoly.tile.Property;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 
-public class GoToJailProperty extends NoneProperty {
-    public GoToJailProperty(String name, Group group, Costs costs, Rents rents, DevelopedLevel developedLevel) {
+public class NoneProperty extends Property {
+    public NoneProperty(String name, Group group, Costs costs, Rents rents, DevelopedLevel developedLevel) {
         super(name, group, costs, rents, developedLevel);
     }
 
     @Override
-    public void visitedBy(Player player) {
-        player.position = 10;
-    }
+    public void visitedBy(Player player) {}
 }

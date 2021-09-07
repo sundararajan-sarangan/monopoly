@@ -27,8 +27,13 @@ public class StandardBoardPropertyFactory {
         rentMap.put(DevelopedLevel.FOUR_HOUSES, Integer.parseInt(record.get(10)));
         rentMap.put(DevelopedLevel.HOTEL, Integer.parseInt(record.get(11)));
         Rents rents = new Rents(rentMap);
-        if("GoToJail".equals(record.get(1))) {
-            return new GoToJailProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
+
+        if("None".equals(record.get(2))) {
+            if ("GoToJail".equals(record.get(1))) {
+                return new GoToJailProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
+            } else {
+                return new NoneProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
+            }
         }
 
         return new Property(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);

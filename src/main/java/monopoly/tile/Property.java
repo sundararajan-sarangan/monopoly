@@ -60,10 +60,6 @@ public class Property {
             return;
         }
 
-        if (this.group.equals(Group.NONE)) {
-            return;
-        }
-
         player.addOption(owner == null ? Move.BUY : Move.PAY_RENT, new Option());
     }
 }
