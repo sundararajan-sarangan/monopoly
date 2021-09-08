@@ -1,20 +1,12 @@
 package test.monopoly.tile;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
-import monopoly.tile.Group;
-import monopoly.tile.DevelopedLevel;
-import monopoly.tile.Property;
-import monopoly.tile.PropertyGroup;
-import monopoly.tile.money.Costs;
-import monopoly.tile.money.Rents;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

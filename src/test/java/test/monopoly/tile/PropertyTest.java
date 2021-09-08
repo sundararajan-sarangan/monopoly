@@ -1,5 +1,6 @@
 package test.monopoly.tile;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
@@ -7,6 +8,7 @@ import monopoly.player.Player;
 import monopoly.tile.*;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
+import monopoly.tile.property.RealEstateProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ public class PropertyTest {
 
     @BeforeEach
     public void init() {
-        boardWalk = new Property("Boardwalk",
+        boardWalk = new RealEstateProperty("Boardwalk",
                 Group.DARK_BLUE,
                 new Costs(440, 200, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 50,

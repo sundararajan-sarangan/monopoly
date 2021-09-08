@@ -1,8 +1,11 @@
 package monopoly.init;
 
+import monopoly.api.Property;
 import monopoly.tile.DevelopedLevel;
 import monopoly.tile.Group;
-import monopoly.tile.Property;
+import monopoly.tile.property.GoToJail;
+import monopoly.tile.property.NoneProperty;
+import monopoly.tile.property.RealEstateProperty;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 
@@ -30,13 +33,13 @@ public class StandardBoardPropertyFactory {
 
         if("None".equals(record.get(2))) {
             if ("GoToJail".equals(record.get(1))) {
-                return new GoToJailProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
+                return new GoToJail(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)));
             } else {
-                return new NoneProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
+                return new NoneProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)));
             }
         }
 
-        return new Property(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
+        return new RealEstateProperty(record.get(0), Group.valueOf(record.get(2).toUpperCase(Locale.ROOT)), costs, rents, DevelopedLevel.NO_HOUSES);
     }
 
 }

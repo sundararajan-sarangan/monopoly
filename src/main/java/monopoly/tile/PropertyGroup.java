@@ -1,5 +1,7 @@
 package monopoly.tile;
 
+import monopoly.api.Property;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

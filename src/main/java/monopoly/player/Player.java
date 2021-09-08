@@ -1,14 +1,16 @@
 package monopoly.player;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.dice.DiceResult;
 import monopoly.player.money.Cash;
-import monopoly.tile.Property;
 import monopoly.turn.Move;
 import monopoly.turn.Option;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Player {
     private final Board board;

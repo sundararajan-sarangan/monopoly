@@ -1,16 +1,12 @@
 package test.monopoly.init;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
-import monopoly.init.GoToJailProperty;
-import monopoly.init.NoneProperty;
 import monopoly.init.StandardBoardMaker;
-import monopoly.init.StandardBoardPropertyFactory;
 import monopoly.tile.Group;
-import monopoly.tile.Property;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StandardBoardMakerTest {
 

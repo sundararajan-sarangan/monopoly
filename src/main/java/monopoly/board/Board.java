@@ -1,9 +1,9 @@
 package monopoly.board;
 
+import monopoly.api.Property;
 import monopoly.dice.DiceResult;
 import monopoly.player.Player;
 import monopoly.tile.Group;
-import monopoly.tile.Property;
 import monopoly.tile.PropertyGroup;
 
 import java.util.ArrayList;

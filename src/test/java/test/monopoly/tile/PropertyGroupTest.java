@@ -1,11 +1,13 @@
 package test.monopoly.tile;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.Player;
 import monopoly.tile.*;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
+import monopoly.tile.property.RealEstateProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,7 @@ public class PropertyGroupTest {
 
     @BeforeEach
     public void init() {
-        boardwalk = new Property("Board Walk",
+        boardwalk = new RealEstateProperty("Board Walk",
                 Group.DARK_BLUE,
                 new Costs(440, 200, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 50,
@@ -32,7 +34,7 @@ public class PropertyGroupTest {
                         DevelopedLevel.FOUR_HOUSES, 1700,
                         DevelopedLevel.HOTEL, 2000)), DevelopedLevel.NO_HOUSES);
 
-        parkPlace = new Property("Park Place",
+        parkPlace = new RealEstateProperty("Park Place",
                 Group.DARK_BLUE,
                 new Costs(350, 175, 200, 200),
                 new Rents(Map.of(DevelopedLevel.NO_HOUSES, 35,

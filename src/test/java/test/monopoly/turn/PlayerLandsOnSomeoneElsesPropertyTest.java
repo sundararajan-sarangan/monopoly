@@ -1,12 +1,13 @@
 package test.monopoly.turn;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
-import monopoly.tile.Property;
+import monopoly.tile.property.RealEstateProperty;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;

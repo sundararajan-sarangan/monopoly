@@ -1,11 +1,14 @@
 package monopoly.init;
 
+import monopoly.api.Property;
 import monopoly.board.Board;
-import monopoly.tile.Property;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class StandardBoardMaker {
     private final static String COMMA_DELIMITER = ",";
