@@ -1,11 +1,7 @@
 package monopoly.tile.property;
 
 import monopoly.api.Property;
-import monopoly.player.Player;
-import monopoly.tile.DevelopedLevel;
 import monopoly.tile.Group;
-import monopoly.tile.money.Costs;
-import monopoly.tile.money.Rents;
 
 public class NoneProperty implements Property {
     protected String name;
