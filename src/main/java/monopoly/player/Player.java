@@ -25,6 +25,7 @@ public class Player {
         this.board = board;
         this.cash = new Cash(1500);
         this.availableMoves = new HashMap<>();
+        availableMoves.put(Move.QUIT, new Option());
         this.dieRollHistory = new DieRollHistory();
     }
 
@@ -38,6 +39,7 @@ public class Player {
 
         if (dieRollHistory.areLastThreeDoubles()) {
             position = 10;
+            this.takeAway(50);
             return true;
         }
 
@@ -55,6 +57,9 @@ public class Player {
 
     public void takeAway(int money) {
         cash.subtract(money);
+        if(cash.isNegativeBalance()) {
+            availableMoves.put(Move.GO_BUST, new Option());
+        }
     }
 
     public boolean inTheRed() {
@@ -90,7 +95,7 @@ public class Player {
         return true;
     }
 
-    public boolean hasOption(Move move) {
+    public boolean hasOptionTo(Move move) {
         return availableMoves.containsKey(move);
     }
 

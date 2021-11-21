@@ -1,7 +1,5 @@
 package monopoly.player.money;
 
-import monopoly.player.Player;
-
 public class Cash {
     private int cash;
     public Cash(int money) {

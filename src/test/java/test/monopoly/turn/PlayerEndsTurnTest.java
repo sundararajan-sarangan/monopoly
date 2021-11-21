@@ -14,13 +14,13 @@ public class PlayerEndsTurnTest {
         // Given
         Player player = new Player(new StandardBoardMaker().makeBoard(), new Dice());
         player.makeTurnToPlay();
-        assertTrue(player.hasOption(Move.TURN_TO_PLAY));
+        assertTrue(player.hasOptionTo(Move.TURN_TO_PLAY));
 
         // When
         player.endTurn();
 
         // Then
-        assertFalse(player.hasOption(Move.TURN_TO_PLAY));
+        assertFalse(player.hasOptionTo(Move.TURN_TO_PLAY));
         assertEquals(0, player.currentOptions().size());
     }
 }

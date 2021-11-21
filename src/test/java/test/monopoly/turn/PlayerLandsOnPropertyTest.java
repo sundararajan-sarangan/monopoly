@@ -29,8 +29,8 @@ public class PlayerLandsOnPropertyTest {
         assertTrue(player.rollDiceAndMove());
 
         // Then
-        assertTrue(playerCan(Move.BUY, player));
-        assertFalse(playerCan(Move.PAY_RENT, player));
+        assertTrue(player.hasOptionTo(Move.BUY));
+        assertFalse(player.hasOptionTo(Move.PAY_RENT));
     }
 
     @Test
@@ -51,8 +51,8 @@ public class PlayerLandsOnPropertyTest {
         assertTrue(player.rollDiceAndMove());
 
         // Then
-        assertTrue(playerCan(Move.PAY_RENT, player));
-        assertFalse(playerCan(Move.BUY, player));
+        assertTrue(player.hasOptionTo(Move.PAY_RENT));
+        assertFalse(player.hasOptionTo(Move.BUY));
     }
 
     @Test
@@ -70,8 +70,8 @@ public class PlayerLandsOnPropertyTest {
         assertTrue(player.rollDiceAndMove());
 
         // Then
-        assertFalse(playerCan(Move.BUY, player));
-        assertFalse(playerCan(Move.PAY_RENT, player));
+        assertFalse(player.hasOptionTo(Move.BUY));
+        assertFalse(player.hasOptionTo(Move.PAY_RENT));
     }
 
     @Test
@@ -89,15 +89,12 @@ public class PlayerLandsOnPropertyTest {
 
         // Then
         assertEquals(17, player.position);
-        assertFalse(playerCan(Move.BUY, player));
-        assertFalse(playerCan(Move.PAY_RENT, player));
+        assertFalse(player.hasOptionTo(Move.BUY));
+        assertFalse(player.hasOptionTo(Move.PAY_RENT));
     }
 
     private Board makeStandardBoard() {
         return (new StandardBoardMaker()).makeBoard();
     }
 
-    private boolean playerCan(Move move, Player player) {
-        return player.hasOption(move);
-    }
 }
