@@ -1,11 +1,10 @@
-package test.monopoly.tile;
+package monopoly.tile;
 
 import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
-import monopoly.tile.*;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 import monopoly.tile.property.RealEstateProperty;

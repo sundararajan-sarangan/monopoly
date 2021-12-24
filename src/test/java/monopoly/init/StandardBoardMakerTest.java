@@ -1,8 +1,7 @@
-package test.monopoly.init;
+package monopoly.init;
 
 import monopoly.api.Property;
 import monopoly.board.Board;
-import monopoly.init.StandardBoardMaker;
 import monopoly.tile.Group;
 import org.junit.jupiter.api.Test;
 

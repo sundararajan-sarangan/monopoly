@@ -1,4 +1,4 @@
-package test.monopoly.tile;
+package monopoly.tile;
 
 import monopoly.api.Property;
 import monopoly.board.Board;

@@ -1,12 +1,12 @@
-package test.monopoly.turn;
+package monopoly.turn;
 
 import monopoly.board.Board;
 import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 import org.junit.jupiter.api.Test;
-import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
 import java.util.List;
 

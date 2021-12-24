@@ -1,8 +1,7 @@
-package test.monopoly.player;
+package monopoly.player;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
-import monopoly.player.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

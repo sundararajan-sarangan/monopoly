@@ -1,4 +1,4 @@
-package test.monopoly.testdoubles;
+package monopoly.testdoubles;
 
 import monopoly.dice.Dice;
 import monopoly.dice.DiceResult;

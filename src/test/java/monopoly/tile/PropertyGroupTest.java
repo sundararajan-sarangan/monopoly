@@ -1,10 +1,9 @@
-package test.monopoly.tile;
+package monopoly.tile;
 
 import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.Player;
-import monopoly.tile.*;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 import monopoly.tile.property.RealEstateProperty;
@@ -14,7 +13,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PropertyGroupTest {
     private static Property boardwalk;

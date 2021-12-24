@@ -1,6 +1,5 @@
-package test.monopoly.game;
+package monopoly.game;
 
-import monopoly.game.Game;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.turn.Move;
@@ -10,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NewGameTest {
+class NewGameTest {
     @Test
     public void createNewGameAndAcceptNumberOfPlayers() {
         // Given

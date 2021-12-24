@@ -1,12 +1,10 @@
-package test.monopoly.init;
+package monopoly.init;
 
 import monopoly.board.Board;
 import monopoly.tile.property.GoToJail;
 import monopoly.tile.property.IncomeTax;
 import monopoly.tile.property.LuxuryTax;
 import monopoly.tile.property.NoneProperty;
-import monopoly.init.StandardBoardMaker;
-import monopoly.init.StandardBoardPropertyFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

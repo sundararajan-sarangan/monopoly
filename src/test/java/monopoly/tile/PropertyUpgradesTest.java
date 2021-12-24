@@ -1,4 +1,4 @@
-package test.monopoly.tile;
+package monopoly.tile;
 
 import monopoly.api.Property;
 import monopoly.board.Board;
@@ -14,13 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PropertyUpgradesTest {
     private static Property boardWalk;
     private static Board board;
-    private static Player owner;
 
     @BeforeEach
     public void init() {
         board = new StandardBoardMaker().makeBoard();
         boardWalk = board.getPropertyAt(39);
-        owner = new Player(board, new Dice());
+        Player owner = new Player(board, new Dice());
         boardWalk.setOwner(owner);
     }
 

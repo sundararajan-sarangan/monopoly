@@ -1,8 +1,5 @@
-package test.monopoly.dice;
+package monopoly.dice;
 
-import monopoly.dice.Dice;
-import monopoly.dice.DiceResult;
-import monopoly.dice.Die;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

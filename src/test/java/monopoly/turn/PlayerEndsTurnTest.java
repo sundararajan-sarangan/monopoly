@@ -1,9 +1,8 @@
-package test.monopoly.turn;
+package monopoly.turn;
 
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
-import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

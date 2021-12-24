@@ -1,4 +1,4 @@
-package test.monopoly.jail;
+package monopoly.jail;
 
 import monopoly.board.Board;
 import monopoly.dice.Dice;
@@ -6,9 +6,9 @@ import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
-import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 
 import java.util.List;
 
