@@ -1,6 +1,5 @@
 package monopoly.tile.property;
 
-import monopoly.api.Property;
 import monopoly.player.Player;
 import monopoly.tile.Group;
 

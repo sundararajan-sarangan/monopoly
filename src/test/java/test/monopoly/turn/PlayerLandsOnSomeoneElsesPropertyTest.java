@@ -7,7 +7,6 @@ import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
-import monopoly.tile.property.RealEstateProperty;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import test.monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
