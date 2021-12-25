@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class NewStandardGameTest {
     @Test
     public void gameAcceptsPlayerNames() throws Exception {
-        new StandardGame("Player1", "Player2");
+        new StandardGame(new StartingPlayersNames("Player1", "Player2"));
     }
 
     @Test
     public void onlyFirstPlayerCanPlayAfterNewGameCreated() throws Exception {
         // Given
-        StandardGame game = new StandardGame("Beep", "Bop", "Boop", "Burp");
+        StandardGame game = new StandardGame(new StartingPlayersNames("Beep", "Bop", "Boop", "Burp"));
 
         // When
         List<Player> players = game.players();
@@ -44,7 +44,7 @@ class NewStandardGameTest {
     @Test
     public void gameCreatesPlayersOnceAndOnlyOnce() throws Exception {
         // Given
-        StandardGame game = new StandardGame("Beep", "Bop", "Boop");
+        StandardGame game = new StandardGame(new StartingPlayersNames("Beep", "Bop", "Boop"));
 
         // When
         List<Player> players1 = game.players();
@@ -57,7 +57,7 @@ class NewStandardGameTest {
     @Test
     public void gameAssociatesNamesWithPlayers() throws Exception {
         // Given
-        StandardGame game = new StandardGame("Beep", "Bop", "Boop");
+        StandardGame game = new StandardGame(new StartingPlayersNames("Beep", "Bop", "Boop"));
 
         // When
         Map<String, Player> namedPlayers = game.namedPlayers();
@@ -70,21 +70,21 @@ class NewStandardGameTest {
 
     @Test
     public void gameDoesntAcceptLessThen2Players() {
-        assertThrows(Exception.class, () -> new StandardGame("Bleep"));
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames("Bleep")));
     }
 
     @Test
     public void gameDoesntAcceptMoreThan4Players() {
-        assertThrows(Exception.class, () -> new StandardGame("Beep", "Bop", "Boop", "Burp", "Zorg"));
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames("Beep", "Bop", "Boop", "Burp", "Zorg")));
     }
 
     @Test
     public void playerNamesShouldHaveAtleastOneCharacter() {
-        assertThrows(Exception.class, () -> new StandardGame("", "lol", "123"));
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames("", "lol", "123")));
     }
 
     @Test
     public void playerNamesShouldNotBeNull() {
-        assertThrows(Exception.class, () -> new StandardGame("bleep", "bloop", null));
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames("bleep", "bloop", null)));
     }
 }

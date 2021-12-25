@@ -15,19 +15,11 @@ import java.util.Map;
 public class StandardGame {
     private final Map<String, Player> namedPlayers;
 
-    public StandardGame(String ...names) throws Exception {
-        if(names.length < 2 || names.length > 4) {
-            throw new Exception();
-        }
-
+    public StandardGame(StartingPlayersNames startingPlayersNames) {
         Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new Dice();
         Map<String, Player> namedPlayers = new LinkedHashMap<>();
-        for(String name : names) {
-            if(name.equals("")) {
-                throw new Exception();
-            }
-
+        for(String name : startingPlayersNames.getNames()) {
             Player player = new Player(board, dice);
             player.addOption(namedPlayers.isEmpty() ? Move.TURN_TO_PLAY : Move.CANNOT_PLAY, new Option());
             namedPlayers.put(name, player);
