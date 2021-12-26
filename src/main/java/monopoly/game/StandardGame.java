@@ -1,5 +1,6 @@
 package monopoly.game;
 
+import monopoly.api.Game;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
@@ -12,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StandardGame {
+public class StandardGame implements Game {
     private final Map<String, Player> namedPlayers;
 
     public StandardGame(StartingPlayersNames startingPlayersNames) {
@@ -28,10 +29,12 @@ public class StandardGame {
         this.namedPlayers = namedPlayers;
     }
 
+    @Override
     public List<Player> players() {
         return new ArrayList<>(namedPlayers.values());
     }
 
+    @Override
     public Map<String, Player> namedPlayers() {
         return namedPlayers;
     }

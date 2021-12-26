@@ -1,10 +1,12 @@
 package monopoly.game;
 
-public class StartingPlayersNames {
-    private final String[] names;
+import java.util.List;
 
-    public StartingPlayersNames(String... names) throws Exception {
-        if(names.length < 2 || names.length > 4) {
+public class StartingPlayersNames {
+    private final List<String> names;
+
+    public StartingPlayersNames(List<String> names) throws Exception {
+        if(names.size() < 2 || names.size() > 4) {
             throw new Exception();
         }
         for(String name : names) {
@@ -16,7 +18,7 @@ public class StartingPlayersNames {
         this.names = names;
     }
 
-    public String[] getNames() {
+    public List<String> getNames() {
         return names;
     }
 }
