@@ -1,8 +1,8 @@
-package monopoly.in.port;
+package monopoly.ports.in;
 
-import monopoly.out.port.EventNotifier;
-import monopoly.out.port.EventNotifierTestDouble;
-import monopoly.out.port.NotificationEvent;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
+import monopoly.ports.out.NotificationEvent;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

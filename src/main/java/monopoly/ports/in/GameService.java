@@ -1,4 +1,4 @@
-package monopoly.in.port;
+package monopoly.ports.in;
 
 public interface GameService {
     void addPlayer(String playerName);

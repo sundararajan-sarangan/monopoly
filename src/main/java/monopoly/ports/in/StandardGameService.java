@@ -1,8 +1,8 @@
-package monopoly.in.port;
+package monopoly.ports.in;
 
 import monopoly.game.StandardGame;
 import monopoly.game.StartingPlayersNames;
-import monopoly.out.port.EventNotifier;
+import monopoly.ports.out.EventNotifier;
 
 import java.util.ArrayList;
 import java.util.List;

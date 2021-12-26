@@ -1,4 +1,4 @@
-package monopoly.out.port;
+package monopoly.ports.out;
 
 import java.util.List;
 
