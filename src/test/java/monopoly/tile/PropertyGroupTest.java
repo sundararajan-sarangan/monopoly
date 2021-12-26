@@ -4,12 +4,15 @@ import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 import monopoly.tile.property.RealEstateProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +24,8 @@ public class PropertyGroupTest {
     private static Property parkPlace;
     private static final Board DUMMY_BOARD = new Board(null);
     private static final Dice DUMMY_DICE = new Dice();
-
+    private static final EventNotifier DUMMY_EVENT_NOTIFIER = new EventNotifierTestDouble(new ArrayList<>());
+    private static final String DUMMY_NAME = "DUMMY_NAME";
     @BeforeEach
     public void init() {
         boardwalk = new RealEstateProperty("Board Walk",
@@ -49,7 +53,7 @@ public class PropertyGroupTest {
     public void sameOwnerForAllProperties() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner = new Player(DUMMY_BOARD, DUMMY_DICE);
+        Player owner = new Player(DUMMY_NAME, DUMMY_BOARD, DUMMY_DICE, DUMMY_EVENT_NOTIFIER);
         boardwalk.setOwner(owner);
         parkPlace.setOwner(owner);
         assertTrue(propertyGroup.oneOwnerHasMonopoly());
@@ -59,8 +63,8 @@ public class PropertyGroupTest {
     public void differentOwnerForProperties() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner1 = new Player(DUMMY_BOARD, DUMMY_DICE);
-        Player owner2 = new Player(DUMMY_BOARD, DUMMY_DICE);
+        Player owner1 = new Player(DUMMY_NAME, DUMMY_BOARD, DUMMY_DICE, DUMMY_EVENT_NOTIFIER);
+        Player owner2 = new Player(DUMMY_NAME, DUMMY_BOARD, DUMMY_DICE, DUMMY_EVENT_NOTIFIER);
         boardwalk.setOwner(owner1);
         boardwalk.setOwner(owner2);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
@@ -70,7 +74,7 @@ public class PropertyGroupTest {
     public void somePropertiesUnOwned() {
         List<Property> properties = List.of(boardwalk, parkPlace);
         PropertyGroup propertyGroup = new PropertyGroup(Group.DARK_BLUE, properties);
-        Player owner = new Player(DUMMY_BOARD, DUMMY_DICE);
+        Player owner = new Player(DUMMY_NAME, DUMMY_BOARD, DUMMY_DICE, DUMMY_EVENT_NOTIFIER);
         boardwalk.setOwner(owner);
         assertFalse(propertyGroup.oneOwnerHasMonopoly());
     }

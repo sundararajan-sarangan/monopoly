@@ -3,6 +3,7 @@ package monopoly.ports.in;
 import monopoly.ports.out.EventNotifier;
 import monopoly.ports.out.EventNotifierTestDouble;
 import monopoly.ports.out.NotificationEvent;
+import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,9 +30,11 @@ public class GameServiceTest {
         gameService.addPlayer("bleep");
         gameService.addPlayer("bloop");
         gameService.startGame();
-        assertEquals(1, playerEvents.size());
 
         assertEquals("bleep", playerEvents.get(0).name);
-        assertEquals(NotificationEvent.TURN_TO_PLAY, playerEvents.get(0).event);
+        assertEquals(Move.TURN_TO_PLAY, playerEvents.get(0).move);
+
+        assertEquals("bloop", playerEvents.get(1).name);
+        assertEquals(Move.CANNOT_PLAY, playerEvents.get(1).move);
     }
 }

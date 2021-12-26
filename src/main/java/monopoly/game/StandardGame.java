@@ -22,11 +22,8 @@ public class StandardGame {
         Dice dice = new Dice();
         Map<String, Player> namedPlayers = new LinkedHashMap<>();
         for(String name : startingPlayersNames.getNames()) {
-            Player player = new Player(board, dice);
+            Player player = new Player(name, board, dice, eventNotifier);
             player.addOption(namedPlayers.isEmpty() ? Move.TURN_TO_PLAY : Move.CANNOT_PLAY, new Option());
-            if(namedPlayers.isEmpty()) {
-                eventNotifier.sendNotification(name, NotificationEvent.TURN_TO_PLAY);
-            }
             namedPlayers.put(name, player);
         }
 

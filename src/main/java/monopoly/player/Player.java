@@ -5,6 +5,7 @@ import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.dice.DiceResult;
 import monopoly.player.money.Cash;
+import monopoly.ports.out.EventNotifier;
 import monopoly.turn.Move;
 import monopoly.turn.Option;
 
@@ -15,18 +16,22 @@ import java.util.Set;
 public class Player {
     private final Board board;
     private final Dice dice;
+    private final EventNotifier eventNotifier;
+    private final String name;
     public int position;
     public final Cash cash;
     private final Map<Move, Option> availableMoves;
     private final DieRollHistory dieRollHistory;
 
-    public Player(Board board, Dice dice) {
+    public Player(String name, Board board, Dice dice, EventNotifier eventNotifier) {
+        this.name = name;
         this.dice = dice;
         this.board = board;
         this.cash = new Cash(1500);
         this.availableMoves = new HashMap<>();
         availableMoves.put(Move.QUIT, new Option());
         this.dieRollHistory = new DieRollHistory();
+        this.eventNotifier = eventNotifier;
     }
 
     public boolean rollDiceAndMove() {
@@ -71,7 +76,8 @@ public class Player {
     }
 
     public void addOption(Move move, Option option) {
-        this.availableMoves.put(move, option);
+        availableMoves.put(move, option);
+        eventNotifier.sendNotification(name, move);
     }
 
     public void makeTurnToPlay() {

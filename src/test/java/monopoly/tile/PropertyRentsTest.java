@@ -5,8 +5,12 @@ import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,11 +19,12 @@ public class PropertyRentsTest {
     private static Property parkPlace;
     private static Board board;
     private static Player owner;
-
+    private static final EventNotifier DUMMY_EVENT_NOTIFIER = new EventNotifierTestDouble(new ArrayList<>());
+    private static final String DUMMY_NAME = "DUMMY_NAME";
     @BeforeEach
     public void init() {
         board = new StandardBoardMaker().makeBoard();
-        owner = new Player(board, new Dice());
+        owner = new Player(DUMMY_NAME, board, new Dice(), DUMMY_EVENT_NOTIFIER);
         boardwalk = board.getPropertyAt(39);
         parkPlace = board.getPropertyAt(37);
     }

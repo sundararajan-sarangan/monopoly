@@ -6,22 +6,26 @@ import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
 import monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerLandsOnPropertyTest {
-
+    private static final EventNotifier DUMMY_EVENT_NOTIFIER = new EventNotifierTestDouble(new ArrayList<>());
+    private static final String DUMMY_NAME = "DUMMY_NAME";
     @Test
     public void shouldPresentTheOptionToBuyWhenPropertyIsUnowned() {
         // Given
         Board board = makeStandardBoard();
         DiceResult diceResult = new DiceResult(Die.TWO, Die.ONE);
         FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(diceResult));
-        Player player = new Player(board, dice);
+        Player player = new Player(DUMMY_NAME, board, dice, DUMMY_EVENT_NOTIFIER);
         player.makeTurnToPlay();
 
         // When
@@ -38,12 +42,12 @@ public class PlayerLandsOnPropertyTest {
         Board board = makeStandardBoard();
 
         Dice dummyDice = new Dice();
-        Player existingOwner = new Player(board, dummyDice);
+        Player existingOwner = new Player(DUMMY_NAME, board, dummyDice, DUMMY_EVENT_NOTIFIER);
         board.getPropertyAt(3).setOwner(existingOwner);
 
         DiceResult diceResult = new DiceResult(Die.ONE, Die.TWO);
         FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(diceResult));
-        Player player = new Player(board, dice);
+        Player player = new Player(DUMMY_NAME, board, dice, DUMMY_EVENT_NOTIFIER);
         player.makeTurnToPlay();
 
         // When
@@ -61,7 +65,7 @@ public class PlayerLandsOnPropertyTest {
 
         DiceResult diceResult = new DiceResult(Die.FIVE, Die.ONE);
         FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(diceResult));
-        Player player = new Player(board, dice);
+        Player player = new Player(DUMMY_NAME, board, dice, DUMMY_EVENT_NOTIFIER);
         player.makeTurnToPlay();
         board.getPropertyAt(6).setOwner(player);
 
@@ -79,7 +83,7 @@ public class PlayerLandsOnPropertyTest {
         Board board = makeStandardBoard();
 
         FakeDiceWithResultsQueuedUp dice = new FakeDiceWithResultsQueuedUp(List.of(new DiceResult(Die.SIX, Die.FOUR), new DiceResult(Die.FOUR, Die.THREE)));
-        Player player = new Player(board, dice);
+        Player player = new Player(DUMMY_NAME, board, dice, DUMMY_EVENT_NOTIFIER);
         player.makeTurnToPlay();
         player.rollDiceAndMove();
 

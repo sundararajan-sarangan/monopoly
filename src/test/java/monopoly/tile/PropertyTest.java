@@ -5,19 +5,23 @@ import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 import monopoly.tile.property.RealEstateProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PropertyTest {
     private static Property boardWalk;
-
+    private static final EventNotifier DUMMY_EVENT_NOTIFIER = new EventNotifierTestDouble(new ArrayList<>());
+    private static final String DUMMY_NAME = "DUMMY_NAME";
     @BeforeEach
     public void init() {
         boardWalk = new RealEstateProperty("Boardwalk",
@@ -49,7 +53,7 @@ public class PropertyTest {
     @Test void testPropertyOwner() {
         Board board = new StandardBoardMaker().makeBoard();
         Dice dice = new Dice();
-        Player owner = new Player(board, dice);
+        Player owner = new Player(DUMMY_NAME, board, dice, DUMMY_EVENT_NOTIFIER);
         boardWalk.setOwner(owner);
         assertEquals(owner, boardWalk.owner());
     }

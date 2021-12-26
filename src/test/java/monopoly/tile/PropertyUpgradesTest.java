@@ -5,8 +5,12 @@ import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,12 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PropertyUpgradesTest {
     private static Property boardWalk;
     private static Board board;
-
+    private static final EventNotifier DUMMY_EVENT_NOTIFIER = new EventNotifierTestDouble(new ArrayList<>());
+    private static final String DUMMY_NAME = "DUMMY_NAME";
     @BeforeEach
     public void init() {
         board = new StandardBoardMaker().makeBoard();
         boardWalk = board.getPropertyAt(39);
-        Player owner = new Player(board, new Dice());
+        Player owner = new Player(DUMMY_NAME, board, new Dice(), DUMMY_EVENT_NOTIFIER);
         boardWalk.setOwner(owner);
     }
 

@@ -1,5 +1,7 @@
 package monopoly.ports.out;
 
+import monopoly.turn.Move;
+
 import java.util.List;
 
 public class EventNotifierTestDouble implements EventNotifier {
@@ -9,16 +11,16 @@ public class EventNotifierTestDouble implements EventNotifier {
     }
 
     @Override
-    public void sendNotification(String name, NotificationEvent event) {
-        this.playerEvents.add(new PlayerEvent(name, event));
+    public void sendNotification(String name, Move move) {
+        this.playerEvents.add(new PlayerEvent(name, move));
     }
 
     public static class PlayerEvent {
         public String name;
-        public NotificationEvent event;
-        public PlayerEvent(String name, NotificationEvent event) {
+        public Move move;
+        public PlayerEvent(String name, Move move) {
             this.name = name;
-            this.event = event;
+            this.move = move;
         }
     }
 }

@@ -3,15 +3,21 @@ package monopoly.turn;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
+import monopoly.ports.out.EventNotifierTestDouble;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerEndsTurnTest {
+    private static final EventNotifier DUMMY_EVENT_NOTIFIER = new EventNotifierTestDouble(new ArrayList<>());
+    private static final String DUMMY_NAME = "DUMMY_NAME";
     @Test
     public void playerEndsTurnTest() {
         // Given
-        Player player = new Player(new StandardBoardMaker().makeBoard(), new Dice());
+        Player player = new Player(DUMMY_NAME, new StandardBoardMaker().makeBoard(), new Dice(), DUMMY_EVENT_NOTIFIER);
         player.makeTurnToPlay();
         assertTrue(player.hasOptionTo(Move.TURN_TO_PLAY));
 
