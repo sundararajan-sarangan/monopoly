@@ -3,9 +3,9 @@ package monopoly.init;
 import monopoly.api.Property;
 import monopoly.tile.DevelopedLevel;
 import monopoly.tile.Group;
-import monopoly.tile.property.*;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
+import monopoly.tile.property.*;
 
 import java.util.HashMap;
 import java.util.List;

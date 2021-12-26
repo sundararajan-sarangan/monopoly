@@ -1,9 +1,7 @@
 package monopoly.in.port;
 
-import monopoly.api.Game;
-
 public interface GameService {
-    void addPlayer(String bleep);
+    void addPlayer(String playerName);
 
-    Game startGame() throws Exception;
+    void startGame() throws Exception;
 }

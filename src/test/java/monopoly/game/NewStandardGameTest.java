@@ -1,9 +1,12 @@
 package monopoly.game;
 
+import monopoly.out.port.EventNotifier;
+import monopoly.out.port.EventNotifierTestDouble;
 import monopoly.player.Player;
 import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +15,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class NewStandardGameTest {
     @Test
     public void gameAcceptsPlayerNames() throws Exception {
-        new StandardGame(new StartingPlayersNames(List.of("Player1", "Player2")));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        new StandardGame(new StartingPlayersNames(List.of("Player1", "Player2")), eventNotifier);
     }
 
     @Test
     public void onlyFirstPlayerCanPlayAfterNewGameCreated() throws Exception {
         // Given
-        StandardGame game = new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop", "Burp")));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        StandardGame game = new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop", "Burp")), eventNotifier);
 
         // When
         List<Player> players = game.players();
@@ -44,7 +49,8 @@ class NewStandardGameTest {
     @Test
     public void gameCreatesPlayersOnceAndOnlyOnce() throws Exception {
         // Given
-        StandardGame game = new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop")));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        StandardGame game = new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop")), eventNotifier);
 
         // When
         List<Player> players1 = game.players();
@@ -57,7 +63,8 @@ class NewStandardGameTest {
     @Test
     public void gameAssociatesNamesWithPlayers() throws Exception {
         // Given
-        StandardGame game = new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop")));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        StandardGame game = new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop")), eventNotifier);
 
         // When
         Map<String, Player> namedPlayers = game.namedPlayers();
@@ -70,16 +77,19 @@ class NewStandardGameTest {
 
     @Test
     public void gameDoesntAcceptLessThen2Players() {
-        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames(List.of("Bleep"))));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames(List.of("Bleep")), eventNotifier));
     }
 
     @Test
     public void gameDoesntAcceptMoreThan4Players() {
-        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop", "Burp", "Zorg"))));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames(List.of("Beep", "Bop", "Boop", "Burp", "Zorg")), eventNotifier));
     }
 
     @Test
     public void playerNamesShouldHaveAtleastOneCharacter() {
-        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames(List.of("", "lol", "123"))));
+        EventNotifier eventNotifier = new EventNotifierTestDouble(new ArrayList<>());
+        assertThrows(Exception.class, () -> new StandardGame(new StartingPlayersNames(List.of("", "lol", "123")), eventNotifier));
     }
 }
