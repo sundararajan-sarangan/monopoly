@@ -20,11 +20,8 @@ public class GameServiceNewGameStartTest {
         gameService.addPlayer("Zop");
         gameService.addPlayer("Zap");
 
-        // When
+        // When & Then
         gameService.startGame();
-
-        // Then
-        // Nothing expected to happen.
     }
 
     @Test
@@ -42,7 +39,6 @@ public class GameServiceNewGameStartTest {
         // Then
         assertEquals("bleep", playerEvents.get(0).name);
         assertEquals(Move.TURN_TO_PLAY, playerEvents.get(0).move);
-
         assertEquals("bloop", playerEvents.get(1).name);
         assertEquals(Move.CANNOT_PLAY, playerEvents.get(1).move);
     }
