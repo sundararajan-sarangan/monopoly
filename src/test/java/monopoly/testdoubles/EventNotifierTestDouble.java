@@ -1,5 +1,6 @@
-package monopoly.ports.out;
+package monopoly.testdoubles;
 
+import monopoly.ports.out.EventNotifier;
 import monopoly.turn.Move;
 
 import java.util.List;

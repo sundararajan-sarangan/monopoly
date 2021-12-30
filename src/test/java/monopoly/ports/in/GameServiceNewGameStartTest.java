@@ -1,7 +1,7 @@
 package monopoly.ports.in;
 
 import monopoly.ports.out.EventNotifier;
-import monopoly.ports.out.EventNotifierTestDouble;
+import monopoly.testdoubles.EventNotifierTestDouble;
 import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
 

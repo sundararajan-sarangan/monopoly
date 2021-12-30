@@ -3,7 +3,7 @@ package monopoly.player;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.ports.out.EventNotifier;
-import monopoly.ports.out.EventNotifierTestDouble;
+import monopoly.testdoubles.EventNotifierTestDouble;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

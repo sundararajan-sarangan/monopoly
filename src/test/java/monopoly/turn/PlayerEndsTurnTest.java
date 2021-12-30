@@ -4,7 +4,7 @@ import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
-import monopoly.ports.out.EventNotifierTestDouble;
+import monopoly.testdoubles.EventNotifierTestDouble;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

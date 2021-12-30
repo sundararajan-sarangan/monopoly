@@ -6,7 +6,7 @@ import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
-import monopoly.ports.out.EventNotifierTestDouble;
+import monopoly.testdoubles.EventNotifierTestDouble;
 import monopoly.tile.money.Costs;
 import monopoly.tile.money.Rents;
 import monopoly.tile.property.RealEstateProperty;

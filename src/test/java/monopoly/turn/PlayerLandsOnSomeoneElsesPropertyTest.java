@@ -8,7 +8,7 @@ import monopoly.dice.Die;
 import monopoly.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
-import monopoly.ports.out.EventNotifierTestDouble;
+import monopoly.testdoubles.EventNotifierTestDouble;
 import monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;

@@ -3,9 +3,8 @@ package monopoly.game;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.init.StandardBoardMaker;
-import monopoly.ports.out.EventNotifier;
-import monopoly.ports.out.NotificationEvent;
 import monopoly.player.Player;
+import monopoly.ports.out.EventNotifier;
 import monopoly.turn.Move;
 import monopoly.turn.Option;
 
