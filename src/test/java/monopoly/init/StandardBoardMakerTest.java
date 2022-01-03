@@ -1,5 +1,6 @@
 package monopoly.init;
 
+import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.tile.Group;

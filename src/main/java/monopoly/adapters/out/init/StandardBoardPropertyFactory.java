@@ -1,4 +1,4 @@
-package monopoly.init;
+package monopoly.adapters.out.init;
 
 import monopoly.api.Property;
 import monopoly.tile.DevelopedLevel;

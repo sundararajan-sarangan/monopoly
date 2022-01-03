@@ -1,7 +1,8 @@
-package monopoly.init;
+package monopoly.adapters.out.init;
 
 import monopoly.api.Property;
 import monopoly.board.Board;
+import monopoly.ports.out.BoardMaker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class StandardBoardMaker {
+public class StandardBoardMaker implements BoardMaker {
     private final static String COMMA_DELIMITER = ",";
     private final static String STANDARD_BOARD_DATA_FILE = "/StandardBoard.csv";
     private final StandardBoardPropertyFactory standardBoardPropertyFactory;
@@ -23,13 +24,13 @@ public class StandardBoardMaker {
         this.standardBoardPropertyFactory = standardBoardPropertyFactory;
     }
 
+    @Override
     public Board makeBoard() {
         List<Property> properties = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(Objects.requireNonNull(getClass().getResource(STANDARD_BOARD_DATA_FILE)).getPath()))) {
             while (scanner.hasNextLine()) {
                 List<String> record = getRecordFromLine(scanner.nextLine());
                 if(record.get(0).startsWith("#")) {
-                    // This is a comment.
                     continue;
                 }
 

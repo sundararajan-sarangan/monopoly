@@ -3,7 +3,7 @@ package monopoly.tile;
 import monopoly.api.Property;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
-import monopoly.init.StandardBoardMaker;
+import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
 import monopoly.testdoubles.EventNotifierTestDouble;

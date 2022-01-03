@@ -3,7 +3,7 @@ package monopoly.player;
 import monopoly.board.Board;
 import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
-import monopoly.init.StandardBoardMaker;
+import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.ports.out.EventNotifier;
 import monopoly.testdoubles.EventNotifierTestDouble;
 import monopoly.testdoubles.FakeDiceWithResultsQueuedUp;
