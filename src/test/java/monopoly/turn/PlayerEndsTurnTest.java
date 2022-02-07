@@ -1,7 +1,7 @@
 package monopoly.turn;
 
-import monopoly.dice.Dice;
 import monopoly.adapters.out.init.StandardBoardMaker;
+import monopoly.dice.Dice;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
 import monopoly.testdoubles.EventNotifierTestDouble;

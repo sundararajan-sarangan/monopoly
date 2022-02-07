@@ -1,10 +1,10 @@
 package monopoly.jail;
 
+import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
 import monopoly.dice.DiceResult;
 import monopoly.dice.Die;
-import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
 import monopoly.testdoubles.EventNotifierTestDouble;

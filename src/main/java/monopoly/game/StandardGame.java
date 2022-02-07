@@ -1,8 +1,8 @@
 package monopoly.game;
 
+import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
-import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.player.Player;
 import monopoly.ports.out.EventNotifier;
 import monopoly.turn.Move;
