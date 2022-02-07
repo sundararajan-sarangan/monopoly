@@ -41,7 +41,6 @@ public class StandardGameService implements GameService {
 
     @Override
     public boolean rollDiceFor(String playerName) {
-        Player player = game.namedPlayers().get(playerName);
-        return player.rollDiceAndMove();
+        return game.namedPlayers().get(playerName).rollDiceAndMove();
     }
 }

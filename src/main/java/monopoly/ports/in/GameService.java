@@ -5,5 +5,5 @@ public interface GameService {
 
     void startGame() throws Exception;
 
-    boolean rollDiceFor(String player);
+    boolean rollDiceFor(String playerName);
 }
