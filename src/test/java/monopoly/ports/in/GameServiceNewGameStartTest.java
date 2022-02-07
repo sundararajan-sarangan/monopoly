@@ -1,5 +1,7 @@
 package monopoly.ports.in;
 
+import monopoly.adapters.out.init.StandardBoardMaker;
+import monopoly.dice.Dice;
 import monopoly.ports.out.EventNotifier;
 import monopoly.testdoubles.EventNotifierTestDouble;
 import monopoly.turn.Move;
@@ -56,5 +58,35 @@ public class GameServiceNewGameStartTest {
         // When && Then
         Exception thrownException = assertThrows(Exception.class, gameService::startGame);
         assertTrue(thrownException.getMessage().contains("Two players cannot have the same name"));
+    }
+
+    @Test
+    public void firstPlayerCanRollDiceAfterNewGameIsStarted() throws Exception {
+        // Given
+        List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
+        EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
+        GameService gameService = new StandardGameService(eventNotifier);
+        gameService.addPlayer("Player1");
+        gameService.addPlayer("Player2");
+        gameService.addPlayer("Player3");
+        gameService.startGame();
+
+        // When && Then
+        assertTrue(gameService.rollDiceFor("Player1"));
+    }
+
+    @Test
+    public void nonFirstPlayerCannotRollDiceAfterNewGameIsStarted() throws Exception {
+        // Given
+        List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
+        EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
+        GameService gameService = new StandardGameService(eventNotifier);
+        gameService.addPlayer("Player1");
+        gameService.addPlayer("Player2");
+        gameService.addPlayer("Player3");
+        gameService.startGame();
+
+        // When && Then
+        assertFalse(gameService.rollDiceFor("Player2"));
     }
 }

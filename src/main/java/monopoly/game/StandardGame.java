@@ -17,8 +17,10 @@ public class StandardGame {
     private final Map<String, Player> namedPlayers;
 
     public StandardGame(StartingPlayersNames startingPlayersNames, EventNotifier eventNotifier) {
-        Board board = new StandardBoardMaker().makeBoard();
-        Dice dice = new Dice();
+        this(startingPlayersNames, eventNotifier, new StandardBoardMaker().makeBoard(), new Dice());
+    }
+
+    StandardGame(StartingPlayersNames startingPlayersNames, EventNotifier eventNotifier, Board board, Dice dice) {
         Map<String, Player> namedPlayers = new LinkedHashMap<>();
         for(String name : startingPlayersNames.getNames()) {
             Player player = new Player(name, board, dice, eventNotifier);
