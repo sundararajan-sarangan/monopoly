@@ -14,6 +14,8 @@ import java.util.List;
 public class StandardGameService implements GameService {
     private final EventNotifier eventNotifier;
     private final List<String> playerNames;
+    private final Dice dice;
+    private final Board board;
     private StandardGame game;
 
     public StandardGameService(EventNotifier eventNotifier) {
@@ -23,6 +25,8 @@ public class StandardGameService implements GameService {
     StandardGameService(EventNotifier eventNotifier, Board board, Dice dice) {
         this.eventNotifier = eventNotifier;
         this.playerNames = new ArrayList<>();
+        this.board = board;
+        this.dice = dice;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class StandardGameService implements GameService {
 
     @Override
     public void startGame() throws Exception {
-        game = new StandardGame(new StartingPlayersNames(playerNames), eventNotifier);
+        game = new StandardGame(new StartingPlayersNames(playerNames), eventNotifier, board, dice);
     }
 
     @Override
