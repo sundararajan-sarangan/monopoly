@@ -25,4 +25,23 @@ public class MultipleTurnsTest {
         // Then
         assertTrue(gameService.rollDiceFor("player2"));
     }
+
+    @Test
+    public void twoPlayersCompleteTurnAllowsThirdPlayerToPlayTest() throws Exception {
+        // Given
+        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        gameService.addPlayer("player1");
+        gameService.addPlayer("player2");
+        gameService.addPlayer("player3");
+        gameService.startGame();
+        gameService.rollDiceFor("player1");
+        gameService.endTurnFor("player1");
+        gameService.rollDiceFor("player2");
+
+        // When
+        gameService.endTurnFor("player2");
+
+        // Then
+        assertTrue(gameService.rollDiceFor("player3"));
+    }
 }

@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class Players {
     private final List<Player> players = new ArrayList<>();
+    private int currentPlayersIndex = 0;
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -29,7 +30,6 @@ public class Players {
     }
 
     public void endTurn() {
-        int currentPlayersIndex = 0;
         players.get(currentPlayersIndex).endTurn();
         int newPlayersIndex = currentPlayersIndex + 1;
         if(newPlayersIndex >= players.size()) {
@@ -37,5 +37,6 @@ public class Players {
         }
 
         players.get(newPlayersIndex).addOption(Move.TURN_TO_PLAY, new Option());
+        currentPlayersIndex = newPlayersIndex;
     }
 }
