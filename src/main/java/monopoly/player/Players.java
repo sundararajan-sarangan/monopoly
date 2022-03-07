@@ -49,5 +49,20 @@ public class Players {
 
     public void quitGameFor(String playerName) {
         nameToPlayerMap().get(playerName).quit();
+        int numberOfPlayersWhoHaveQuit = 0;
+        for(Player player : players) {
+            if(player.hasQuit()) {
+                numberOfPlayersWhoHaveQuit++;
+            }
+        }
+
+        if(players.size() - numberOfPlayersWhoHaveQuit == 1) {
+            for(Player player : players) {
+                if(!player.hasQuit()) {
+                    player.addOption(Move.WON, new Option());
+                    break;
+                }
+            }
+        }
     }
 }

@@ -98,7 +98,7 @@ public class MultipleTurnsTest {
         gameService.quitGameFor("player1");
 
         // Then
-        assertThatPlayerHasQuit("player1", playerEvents);
+        assertThatPlayerHasEvent("player1", Move.QUIT, playerEvents);
     }
 
     @Test
@@ -122,10 +122,31 @@ public class MultipleTurnsTest {
         assertTrue(gameService.rollDiceFor("player4"));
     }
 
-    private void assertThatPlayerHasQuit(String playerName, ArrayList<EventNotifierTestDouble.PlayerEvent> listOfPlayerEvents) {
+    @Test
+    public void gameEndsWhenAllButOnePlayerHaveQuit() throws Exception {
+        // Given
+        ArrayList<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
+        EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(playerEvents);
+        GameService gameService = new StandardGameService(fakeEventNotifier);
+        gameService.addPlayer("player1");
+        gameService.addPlayer("player2");
+        gameService.addPlayer("player3");
+        gameService.addPlayer("player4");
+        gameService.startGame();
+        gameService.quitGameFor("player2");
+        gameService.quitGameFor("player3");
+
+        // When
+        gameService.quitGameFor("player1");
+
+        // Then
+        assertThatPlayerHasEvent("player4", Move.WON, playerEvents);
+    }
+
+    private void assertThatPlayerHasEvent(String playerName, Move move, ArrayList<EventNotifierTestDouble.PlayerEvent> listOfPlayerEvents) {
         boolean player1Quit = false;
         for(EventNotifierTestDouble.PlayerEvent playerEvent : listOfPlayerEvents) {
-            if(playerEvent.name.equals(playerName) && playerEvent.move.equals(Move.QUIT)) {
+            if(playerEvent.name.equals(playerName) && playerEvent.move.equals(move)) {
                 player1Quit = true;
                 break;
             }
