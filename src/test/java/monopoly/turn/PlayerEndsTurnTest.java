@@ -26,6 +26,6 @@ public class PlayerEndsTurnTest {
 
         // Then
         assertFalse(player.hasOptionTo(Move.TURN_TO_PLAY));
-        assertEquals(0, player.currentOptions().size());
+        assertTrue(player.hasOptionTo(Move.CANNOT_PLAY));
     }
 }

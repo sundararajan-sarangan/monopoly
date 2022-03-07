@@ -32,8 +32,15 @@ public class Players {
     public void endTurn() {
         players.get(currentPlayersIndex).endTurn();
         int newPlayersIndex = currentPlayersIndex + 1;
-        if(newPlayersIndex >= players.size()) {
+        if (newPlayersIndex >= players.size()) {
             newPlayersIndex = 0;
+        }
+
+        while (players.get(newPlayersIndex).hasQuit()) {
+            newPlayersIndex++;
+            if (newPlayersIndex >= players.size()) {
+                newPlayersIndex = 0;
+            }
         }
 
         players.get(newPlayersIndex).addOption(Move.TURN_TO_PLAY, new Option());

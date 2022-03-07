@@ -86,8 +86,8 @@ public class MultipleTurnsTest {
     @Test
     public void shouldBeAbleToQuitGameEvenWhenItsNotPlayersTurn() throws Exception {
         // Given
-        ArrayList<EventNotifierTestDouble.PlayerEvent> listOfPlayerEvents = new ArrayList<>();
-        EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(listOfPlayerEvents);
+        ArrayList<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
+        EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(playerEvents);
         GameService gameService = new StandardGameService(fakeEventNotifier);
         gameService.addPlayer("player1");
         gameService.addPlayer("player2");
@@ -98,7 +98,28 @@ public class MultipleTurnsTest {
         gameService.quitGameFor("player1");
 
         // Then
-        assertThatPlayerHasQuit("player1", listOfPlayerEvents);
+        assertThatPlayerHasQuit("player1", playerEvents);
+    }
+
+    @Test
+    public void quitPlayersAreSkippedWhenTurnEnds() throws Exception {
+        // Given
+        ArrayList<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
+        EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(playerEvents);
+        GameService gameService = new StandardGameService(fakeEventNotifier);
+        gameService.addPlayer("player1");
+        gameService.addPlayer("player2");
+        gameService.addPlayer("player3");
+        gameService.addPlayer("player4");
+        gameService.startGame();
+        gameService.quitGameFor("player2");
+        gameService.quitGameFor("player3");
+
+        // When
+        gameService.endTurnFor("player1");
+
+        // Then
+        assertTrue(gameService.rollDiceFor("player4"));
     }
 
     private void assertThatPlayerHasQuit(String playerName, ArrayList<EventNotifierTestDouble.PlayerEvent> listOfPlayerEvents) {

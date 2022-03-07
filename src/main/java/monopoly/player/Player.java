@@ -107,6 +107,7 @@ public class Player {
 
     public void endTurn() {
         availableMoves.clear();
+        availableMoves.put(Move.CANNOT_PLAY, new Option());
     }
 
     public boolean canBuy() {
@@ -120,5 +121,9 @@ public class Player {
     public void quit() {
         availableMoves.clear();
         eventNotifier.sendNotification(name, Move.QUIT);
+    }
+
+    public boolean hasQuit() {
+        return availableMoves.isEmpty();
     }
 }
