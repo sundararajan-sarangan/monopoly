@@ -116,4 +116,9 @@ public class Player {
     public boolean canPayRent() {
         return availableMoves.containsKey(Move.PAY_RENT);
     }
+
+    public void quit() {
+        availableMoves.clear();
+        eventNotifier.sendNotification(name, Move.QUIT);
+    }
 }

@@ -41,6 +41,6 @@ public class Players {
     }
 
     public void quitGameFor(String playerName) {
-        throw new UnsupportedOperationException();
+        nameToPlayerMap().get(playerName).quit();
     }
 }

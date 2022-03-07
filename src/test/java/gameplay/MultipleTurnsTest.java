@@ -3,6 +3,7 @@ package gameplay;
 import monopoly.ports.in.GameService;
 import monopoly.ports.in.StandardGameService;
 import monopoly.testdoubles.EventNotifierTestDouble;
+import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -97,7 +98,18 @@ public class MultipleTurnsTest {
         gameService.quitGameFor("player1");
 
         // Then
-        // TODO: Inspect the list of player events and assert that player 1 quit the game.
-        assertNotNull(listOfPlayerEvents);
+        assertThatPlayerHasQuit("player1", listOfPlayerEvents);
+    }
+
+    private void assertThatPlayerHasQuit(String playerName, ArrayList<EventNotifierTestDouble.PlayerEvent> listOfPlayerEvents) {
+        boolean player1Quit = false;
+        for(EventNotifierTestDouble.PlayerEvent playerEvent : listOfPlayerEvents) {
+            if(playerEvent.name.equals(playerName) && playerEvent.move.equals(Move.QUIT)) {
+                player1Quit = true;
+                break;
+            }
+        }
+
+        assertTrue(player1Quit);
     }
 }
