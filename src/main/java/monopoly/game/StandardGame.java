@@ -15,14 +15,16 @@ import java.util.Map;
 
 public class StandardGame {
     private final Map<String, Player> namedPlayers;
+    private final Players players;
 
-    public StandardGame(StartingPlayersNames startingPlayersNames, EventNotifier eventNotifier) {
-        this(startingPlayersNames, eventNotifier, new StandardBoardMaker().makeBoard(), new Dice());
+    public StandardGame(Players players, EventNotifier eventNotifier) {
+        this(players, eventNotifier, new StandardBoardMaker().makeBoard(), new Dice());
     }
 
-    public StandardGame(StartingPlayersNames startingPlayersNames, EventNotifier eventNotifier, Board board, Dice dice) {
+    public StandardGame(Players players, EventNotifier eventNotifier, Board board, Dice dice) {
+        this.players = players;
         Map<String, Player> namedPlayers = new LinkedHashMap<>();
-        for(String name : startingPlayersNames.getNames()) {
+        for(String name : players.getNames()) {
             Player player = new Player(name, board, dice, eventNotifier);
             player.addOption(namedPlayers.isEmpty() ? Move.TURN_TO_PLAY : Move.CANNOT_PLAY, new Option());
             namedPlayers.put(name, player);
@@ -35,7 +37,19 @@ public class StandardGame {
         return new ArrayList<>(namedPlayers.values());
     }
 
-    public Map<String, Player> namedPlayers() {
+    public Map<String, Player> namesAndPlayers() {
         return namedPlayers;
+    }
+
+    public void endTurnFor(String playerName) {
+        int currentPlayersIndex = players.getNames().indexOf(playerName);
+        namedPlayers.get(playerName).endTurn();
+        currentPlayersIndex++;
+        if(currentPlayersIndex >= players.getNames().size()) {
+            currentPlayersIndex = 0;
+        }
+
+        String newPlayerName = players.getNames().get(currentPlayersIndex);
+        namedPlayers.get(newPlayerName).addOption(Move.TURN_TO_PLAY, new Option());
     }
 }

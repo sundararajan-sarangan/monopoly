@@ -1,0 +1,28 @@
+package gameplay;
+
+import monopoly.ports.in.GameService;
+import monopoly.ports.in.StandardGameService;
+import monopoly.testdoubles.EventNotifierTestDouble;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class MultipleTurnsTest {
+    @Test
+    public void firstPlayerCompletesTurnAllowsNextPlayerToPlayTest() throws Exception {
+        // Given
+        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        gameService.addPlayer("player1");
+        gameService.addPlayer("player2");
+        gameService.startGame();
+        gameService.rollDiceFor("player1");
+
+        // When
+        gameService.endTurnFor("player1");
+
+        // Then
+        assertTrue(gameService.rollDiceFor("player2"));
+    }
+}
