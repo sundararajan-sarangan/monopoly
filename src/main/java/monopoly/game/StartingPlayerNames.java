@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Players {
+public class StartingPlayerNames {
     private final List<String> names;
 
-    public Players(List<String> names) throws Exception {
+    public StartingPlayerNames(List<String> names) throws Exception {
         Set<String> seenNames = new HashSet<>();
         if(names.size() < 2 || names.size() > 4) {
             throw new Exception();

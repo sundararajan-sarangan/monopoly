@@ -17,7 +17,7 @@ public class Player {
     private final Board board;
     private final Dice dice;
     private final EventNotifier eventNotifier;
-    private final String name;
+    public final String name;
     public int position;
     public final Cash cash;
     private final Map<Move, Option> availableMoves;

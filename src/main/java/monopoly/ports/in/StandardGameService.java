@@ -3,7 +3,7 @@ package monopoly.ports.in;
 import monopoly.adapters.out.init.StandardBoardMaker;
 import monopoly.board.Board;
 import monopoly.dice.Dice;
-import monopoly.game.Players;
+import monopoly.game.StartingPlayerNames;
 import monopoly.game.StandardGame;
 import monopoly.ports.out.BoardMaker;
 import monopoly.ports.out.EventNotifier;
@@ -40,7 +40,7 @@ public class StandardGameService implements GameService {
     }
 
     private StandardGame startNewGameWith(List<String> playerNames, Board board, Dice dice) throws Exception {
-        return new StandardGame(new Players(playerNames), eventNotifier, board, dice);
+        return new StandardGame(new StartingPlayerNames(playerNames), eventNotifier, board, dice);
     }
 
     @Override
