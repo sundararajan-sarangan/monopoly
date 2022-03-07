@@ -39,4 +39,8 @@ public class Players {
         players.get(newPlayersIndex).addOption(Move.TURN_TO_PLAY, new Option());
         currentPlayersIndex = newPlayersIndex;
     }
+
+    public void quitGameFor(String playerName) {
+        throw new UnsupportedOperationException();
+    }
 }

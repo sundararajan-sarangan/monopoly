@@ -8,4 +8,6 @@ public interface GameService {
     boolean rollDiceFor(String playerName);
 
     void endTurnFor(String playerName);
+
+    void quitGameFor(String playerName);
 }

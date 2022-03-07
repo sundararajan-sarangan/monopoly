@@ -52,4 +52,9 @@ public class StandardGameService implements GameService {
     public void endTurnFor(String playerName) {
         game.endTurnFor(playerName);
     }
+
+    @Override
+    public void quitGameFor(String playerName) {
+        game.quitGameFor(playerName);
+    }
 }

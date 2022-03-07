@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MultipleTurnsTest {
     @Test
@@ -64,5 +64,40 @@ public class MultipleTurnsTest {
 
         // Then
         assertTrue(gameService.rollDiceFor("player1"));
+    }
+
+    @Test
+    public void shouldNotBeAbleToPlayAfterEndingTurn() throws Exception {
+        // Given
+        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        gameService.addPlayer("player1");
+        gameService.addPlayer("player2");
+        gameService.addPlayer("player3");
+        gameService.startGame();
+
+        // When
+        gameService.endTurnFor("player1");
+
+        // Then
+        assertFalse(gameService.rollDiceFor("player1"));
+    }
+
+    @Test
+    public void shouldBeAbleToQuitGameEvenWhenItsNotPlayersTurn() throws Exception {
+        // Given
+        ArrayList<EventNotifierTestDouble.PlayerEvent> listOfPlayerEvents = new ArrayList<>();
+        EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(listOfPlayerEvents);
+        GameService gameService = new StandardGameService(fakeEventNotifier);
+        gameService.addPlayer("player1");
+        gameService.addPlayer("player2");
+        gameService.startGame();
+        gameService.endTurnFor("player1");
+
+        // When
+        gameService.quitGameFor("player1");
+
+        // Then
+        // TODO: Inspect the list of player events and assert that player 1 quit the game.
+        assertNotNull(listOfPlayerEvents);
     }
 }

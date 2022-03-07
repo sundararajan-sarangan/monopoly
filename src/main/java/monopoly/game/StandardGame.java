@@ -41,4 +41,8 @@ public class StandardGame {
     public void endTurnFor(String playerName) {
         players.endTurn();
     }
+
+    public void quitGameFor(String playerName) {
+        players.quitGameFor(playerName);
+    }
 }
