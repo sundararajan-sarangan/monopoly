@@ -1,7 +1,7 @@
 package gameplay;
 
-import monopoly.ports.in.GameService;
-import monopoly.ports.in.StandardGameService;
+import monopoly.ports.in.SingleGameService;
+import monopoly.ports.in.StandardSingleGameService;
 import monopoly.testdoubles.EventNotifierTestDouble;
 import monopoly.turn.Move;
 import org.junit.jupiter.api.Test;
@@ -14,73 +14,73 @@ public class MultipleTurnsTest {
     @Test
     public void firstPlayerCompletesTurnAllowsNextPlayerToPlayTest() throws Exception {
         // Given
-        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.startGame();
-        gameService.rollDiceFor("player1");
+        SingleGameService singleGameService = new StandardSingleGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.startGame();
+        singleGameService.rollDiceFor("player1");
 
         // When
-        gameService.endTurnFor("player1");
+        singleGameService.endTurnFor("player1");
 
         // Then
-        assertTrue(gameService.rollDiceFor("player2"));
+        assertTrue(singleGameService.rollDiceFor("player2"));
     }
 
     @Test
     public void twoPlayersCompleteTurnAllowsThirdPlayerToPlayTest() throws Exception {
         // Given
-        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.addPlayer("player3");
-        gameService.startGame();
-        gameService.rollDiceFor("player1");
-        gameService.endTurnFor("player1");
-        gameService.rollDiceFor("player2");
+        SingleGameService singleGameService = new StandardSingleGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.addPlayer("player3");
+        singleGameService.startGame();
+        singleGameService.rollDiceFor("player1");
+        singleGameService.endTurnFor("player1");
+        singleGameService.rollDiceFor("player2");
 
         // When
-        gameService.endTurnFor("player2");
+        singleGameService.endTurnFor("player2");
 
         // Then
-        assertTrue(gameService.rollDiceFor("player3"));
+        assertTrue(singleGameService.rollDiceFor("player3"));
     }
 
     @Test
     public void shouldReturnToFirstPlayerWhenAllPlayersHaveGoneOneRound() throws Exception {
         // Given
-        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.addPlayer("player3");
-        gameService.startGame();
-        gameService.rollDiceFor("player1");
-        gameService.endTurnFor("player1");
-        gameService.rollDiceFor("player2");
-        gameService.endTurnFor("player2");
-        gameService.rollDiceFor("player3");
+        SingleGameService singleGameService = new StandardSingleGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.addPlayer("player3");
+        singleGameService.startGame();
+        singleGameService.rollDiceFor("player1");
+        singleGameService.endTurnFor("player1");
+        singleGameService.rollDiceFor("player2");
+        singleGameService.endTurnFor("player2");
+        singleGameService.rollDiceFor("player3");
 
         // When
-        gameService.endTurnFor("player3");
+        singleGameService.endTurnFor("player3");
 
         // Then
-        assertTrue(gameService.rollDiceFor("player1"));
+        assertTrue(singleGameService.rollDiceFor("player1"));
     }
 
     @Test
     public void shouldNotBeAbleToPlayAfterEndingTurn() throws Exception {
         // Given
-        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.addPlayer("player3");
-        gameService.startGame();
+        SingleGameService singleGameService = new StandardSingleGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.addPlayer("player3");
+        singleGameService.startGame();
 
         // When
-        gameService.endTurnFor("player1");
+        singleGameService.endTurnFor("player1");
 
         // Then
-        assertFalse(gameService.rollDiceFor("player1"));
+        assertFalse(singleGameService.rollDiceFor("player1"));
     }
 
     @Test
@@ -88,14 +88,14 @@ public class MultipleTurnsTest {
         // Given
         ArrayList<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(fakeEventNotifier);
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.startGame();
-        gameService.endTurnFor("player1");
+        SingleGameService singleGameService = new StandardSingleGameService(fakeEventNotifier);
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.startGame();
+        singleGameService.endTurnFor("player1");
 
         // When
-        gameService.quitGameFor("player1");
+        singleGameService.quitGameFor("player1");
 
         // Then
         assertThatPlayerHasEvent("player1", Move.QUIT, playerEvents);
@@ -106,20 +106,20 @@ public class MultipleTurnsTest {
         // Given
         ArrayList<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(fakeEventNotifier);
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.addPlayer("player3");
-        gameService.addPlayer("player4");
-        gameService.startGame();
-        gameService.quitGameFor("player2");
-        gameService.quitGameFor("player3");
+        SingleGameService singleGameService = new StandardSingleGameService(fakeEventNotifier);
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.addPlayer("player3");
+        singleGameService.addPlayer("player4");
+        singleGameService.startGame();
+        singleGameService.quitGameFor("player2");
+        singleGameService.quitGameFor("player3");
 
         // When
-        gameService.endTurnFor("player1");
+        singleGameService.endTurnFor("player1");
 
         // Then
-        assertTrue(gameService.rollDiceFor("player4"));
+        assertTrue(singleGameService.rollDiceFor("player4"));
     }
 
     @Test
@@ -127,17 +127,17 @@ public class MultipleTurnsTest {
         // Given
         ArrayList<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifierTestDouble fakeEventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(fakeEventNotifier);
-        gameService.addPlayer("player1");
-        gameService.addPlayer("player2");
-        gameService.addPlayer("player3");
-        gameService.addPlayer("player4");
-        gameService.startGame();
-        gameService.quitGameFor("player2");
-        gameService.quitGameFor("player3");
+        SingleGameService singleGameService = new StandardSingleGameService(fakeEventNotifier);
+        singleGameService.addPlayer("player1");
+        singleGameService.addPlayer("player2");
+        singleGameService.addPlayer("player3");
+        singleGameService.addPlayer("player4");
+        singleGameService.startGame();
+        singleGameService.quitGameFor("player2");
+        singleGameService.quitGameFor("player3");
 
         // When
-        gameService.quitGameFor("player1");
+        singleGameService.quitGameFor("player1");
 
         // Then
         assertThatPlayerHasEvent("player4", Move.WON, playerEvents);

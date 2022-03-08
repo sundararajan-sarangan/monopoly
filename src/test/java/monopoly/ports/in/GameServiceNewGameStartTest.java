@@ -15,13 +15,13 @@ public class GameServiceNewGameStartTest {
     @Test
     public void startGameWithSomePlayersTest() throws Exception {
         // Given
-        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
-        gameService.addPlayer("Zip");
-        gameService.addPlayer("Zop");
-        gameService.addPlayer("Zap");
+        SingleGameService singleGameService = new StandardSingleGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        singleGameService.addPlayer("Zip");
+        singleGameService.addPlayer("Zop");
+        singleGameService.addPlayer("Zap");
 
         // When & Then
-        gameService.startGame();
+        singleGameService.startGame();
     }
 
     @Test
@@ -29,12 +29,12 @@ public class GameServiceNewGameStartTest {
         // Given
         List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(eventNotifier);
-        gameService.addPlayer("bleep");
-        gameService.addPlayer("bloop");
+        SingleGameService singleGameService = new StandardSingleGameService(eventNotifier);
+        singleGameService.addPlayer("bleep");
+        singleGameService.addPlayer("bloop");
 
         // When
-        gameService.startGame();
+        singleGameService.startGame();
 
         // Then
         assertEquals("bleep", playerEvents.get(0).name);
@@ -48,13 +48,13 @@ public class GameServiceNewGameStartTest {
         // Given
         List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(eventNotifier);
-        gameService.addPlayer("Goo");
-        gameService.addPlayer("Gaa");
-        gameService.addPlayer("Goo");
+        SingleGameService singleGameService = new StandardSingleGameService(eventNotifier);
+        singleGameService.addPlayer("Goo");
+        singleGameService.addPlayer("Gaa");
+        singleGameService.addPlayer("Goo");
 
         // When && Then
-        Exception thrownException = assertThrows(Exception.class, gameService::startGame);
+        Exception thrownException = assertThrows(Exception.class, singleGameService::startGame);
         assertTrue(thrownException.getMessage().contains("Two players cannot have the same name"));
     }
 
@@ -63,14 +63,14 @@ public class GameServiceNewGameStartTest {
         // Given
         List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(eventNotifier);
-        gameService.addPlayer("Player1");
-        gameService.addPlayer("Player2");
-        gameService.addPlayer("Player3");
-        gameService.startGame();
+        SingleGameService singleGameService = new StandardSingleGameService(eventNotifier);
+        singleGameService.addPlayer("Player1");
+        singleGameService.addPlayer("Player2");
+        singleGameService.addPlayer("Player3");
+        singleGameService.startGame();
 
         // When && Then
-        assertTrue(gameService.rollDiceFor("Player1"));
+        assertTrue(singleGameService.rollDiceFor("Player1"));
     }
 
     @Test
@@ -78,26 +78,26 @@ public class GameServiceNewGameStartTest {
         // Given
         List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
-        GameService gameService = new StandardGameService(eventNotifier);
-        gameService.addPlayer("Player1");
-        gameService.addPlayer("Player2");
-        gameService.addPlayer("Player3");
-        gameService.startGame();
+        SingleGameService singleGameService = new StandardSingleGameService(eventNotifier);
+        singleGameService.addPlayer("Player1");
+        singleGameService.addPlayer("Player2");
+        singleGameService.addPlayer("Player3");
+        singleGameService.startGame();
 
         // When && Then
-        assertFalse(gameService.rollDiceFor("Player2"));
+        assertFalse(singleGameService.rollDiceFor("Player2"));
     }
 
     @Test
     public void cannotAddPlayersAfterGameHasAlreadyStarted() throws Exception {
         // Given
-        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
-        gameService.addPlayer("Player1");
-        gameService.addPlayer("Player2");
-        gameService.startGame();
+        SingleGameService singleGameService = new StandardSingleGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        singleGameService.addPlayer("Player1");
+        singleGameService.addPlayer("Player2");
+        singleGameService.startGame();
 
         // When && Then
-        Exception thrown = assertThrows(Exception.class, () -> gameService.addPlayer("Player3"));
+        Exception thrown = assertThrows(Exception.class, () -> singleGameService.addPlayer("Player3"));
         assertEquals("Game already in progress. Cannot add a player!", thrown.getMessage());
     }
 }

@@ -1,6 +1,6 @@
 package monopoly.ports.in;
 
-public interface GameService {
+public interface SingleGameService {
     void addPlayer(String playerName) throws Exception;
 
     void startGame() throws Exception;

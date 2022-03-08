@@ -11,18 +11,18 @@ import monopoly.ports.out.EventNotifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StandardGameService implements GameService {
+public class StandardSingleGameService implements SingleGameService {
     private final EventNotifier eventNotifier;
     private final List<String> playerNames;
     private final Dice dice;
     private final BoardMaker boardMaker;
     private StandardGame game;
 
-    public StandardGameService(EventNotifier eventNotifier) {
+    public StandardSingleGameService(EventNotifier eventNotifier) {
         this(eventNotifier, new StandardBoardMaker(), new Dice());
     }
 
-    StandardGameService(EventNotifier eventNotifier, BoardMaker boardMaker, Dice dice) {
+    StandardSingleGameService(EventNotifier eventNotifier, BoardMaker boardMaker, Dice dice) {
         this.eventNotifier = eventNotifier;
         this.playerNames = new ArrayList<>();
         this.boardMaker = boardMaker;
