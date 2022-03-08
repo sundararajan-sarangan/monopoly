@@ -1,4 +1,4 @@
-package gameplay;
+package monopoly.ports.in;
 
 import monopoly.ports.in.SingleGameService;
 import monopoly.ports.in.StandardSingleGameService;

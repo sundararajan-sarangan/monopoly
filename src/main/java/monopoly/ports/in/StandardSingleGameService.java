@@ -11,7 +11,7 @@ import monopoly.ports.out.EventNotifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StandardSingleGameService implements SingleGameService {
+class StandardSingleGameService implements SingleGameService {
     private final EventNotifier eventNotifier;
     private final List<String> playerNames;
     private final Dice dice;

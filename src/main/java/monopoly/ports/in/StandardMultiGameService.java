@@ -1,6 +1,6 @@
 package monopoly.ports.in;
 
-public class StandardMultiGameService implements MultiGameService {
+class StandardMultiGameService implements MultiGameService {
     private StandardMultiGameService() {
     }
 
