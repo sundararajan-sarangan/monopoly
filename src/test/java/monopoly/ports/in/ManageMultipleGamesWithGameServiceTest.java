@@ -22,4 +22,11 @@ public class ManageMultipleGamesWithGameServiceTest {
     public void callingGetInstanceOnStandardMultiGameServiceReturnsASingleton() {
         assertEquals(StandardMultiGameService.getInstance(), StandardMultiGameService.getInstance());
     }
+
+    @Test
+    public void shouldReturnARandomFourCharacterGameCodeWhenPrepareNewGameIsCalled() {
+        MultiGameService gameService = StandardMultiGameService.getInstance();
+        String gameCode = gameService.prepareNewGame();
+        assertEquals(4, gameCode.length());
+    }
 }

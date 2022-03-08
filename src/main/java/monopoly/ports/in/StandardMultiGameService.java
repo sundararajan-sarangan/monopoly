@@ -1,5 +1,7 @@
 package monopoly.ports.in;
 
+import org.apache.commons.lang.RandomStringUtils;
+
 class StandardMultiGameService implements MultiGameService {
     private StandardMultiGameService() {
     }
@@ -14,6 +16,6 @@ class StandardMultiGameService implements MultiGameService {
 
     @Override
     public String prepareNewGame() {
-        return "";
+        return RandomStringUtils.random(4, true, true);
     }
 }
