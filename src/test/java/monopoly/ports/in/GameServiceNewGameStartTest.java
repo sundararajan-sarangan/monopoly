@@ -44,7 +44,7 @@ public class GameServiceNewGameStartTest {
     }
 
     @Test
-    public void startingGameWithDuplicatePlayersThrowsException() {
+    public void startingGameWithDuplicatePlayersThrowsException() throws Exception {
         // Given
         List<EventNotifierTestDouble.PlayerEvent> playerEvents = new ArrayList<>();
         EventNotifier eventNotifier = new EventNotifierTestDouble(playerEvents);
@@ -86,5 +86,18 @@ public class GameServiceNewGameStartTest {
 
         // When && Then
         assertFalse(gameService.rollDiceFor("Player2"));
+    }
+
+    @Test
+    public void cannotAddPlayersAfterGameHasAlreadyStarted() throws Exception {
+        // Given
+        GameService gameService = new StandardGameService(new EventNotifierTestDouble(new ArrayList<>()));
+        gameService.addPlayer("Player1");
+        gameService.addPlayer("Player2");
+        gameService.startGame();
+
+        // When && Then
+        Exception thrown = assertThrows(Exception.class, () -> gameService.addPlayer("Player3"));
+        assertEquals("Game already in progress. Cannot add a player!", thrown.getMessage());
     }
 }

@@ -30,8 +30,16 @@ public class StandardGameService implements GameService {
     }
 
     @Override
-    public void addPlayer(String playerName) {
+    public void addPlayer(String playerName) throws Exception {
+        if(gameHasAlreadyStarted()) {
+            throw new Exception("Game already in progress. Cannot add a player!");
+        }
+
         playerNames.add(playerName);
+    }
+
+    private boolean gameHasAlreadyStarted() {
+        return game != null;
     }
 
     @Override
